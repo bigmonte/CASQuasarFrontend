@@ -16,7 +16,7 @@
             </q-card-section>
             <q-card-actions>
               <q-btn flat
-                @click="toggleView">Edit</q-btn>
+                @click="onEditButtonClicked(command)">Edit</q-btn>
             </q-card-actions>
           </q-card>
         </div>
@@ -25,6 +25,7 @@
   <command-edit
     v-else
     :command="activeCommand"
+    @on-command-update="refreshCommand"
     @on-back-clicked="toggleView"/>
 </template>
 
@@ -46,12 +47,21 @@ export default {
     }
   },
   methods: {
+    onEditButtonClicked (selectedCommand) {
+      this.selectCommand(selectedCommand)
+      this.toggleView()
+    },
     selectCommand (selectedCommand) {
       this.selectedCommand = selectedCommand
     },
     toggleView () {
       console.log('toggle view')
       this.isDetailView = !this.isDetailView
+    },
+    refreshCommand (newCommand) {
+      const index = this.commands.findIndex(r => r.id === newCommand.id)
+      this.commands[index] = newCommand
+      this.selectedCommand = newCommand
     }
   },
   computed: {

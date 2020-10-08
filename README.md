@@ -1,6 +1,9 @@
 # CommandQuasarFrontend (command-quasar-frontend)
 
-Frontend for ASP.NET API Core 3.1
+Simple frontend demo for the command helper demo made in ASP.NET API Core 3.1 using quasar
+
+![alt text](https://i.imgur.com/4Jio0TU.png)
+
 
 ## Install the dependencies
 ```bash
