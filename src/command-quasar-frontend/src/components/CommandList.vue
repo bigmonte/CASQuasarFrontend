@@ -1,5 +1,6 @@
 <template>
-    <div class="q-ma-xl">
+    <div class="q-ma-xl"
+      v-if="isDetailView">
       <q-scroll-area
         :visible=true
         style="height: 600px; max-width: 100%;"
@@ -14,22 +15,56 @@
               </div>
             </q-card-section>
             <q-card-actions>
-              <q-btn flat>Edit</q-btn>
+              <q-btn flat
+                @click="toggleView">Edit</q-btn>
             </q-card-actions>
           </q-card>
         </div>
       </q-scroll-area>
   </div>
+  <command-edit
+    v-else
+    :command="activeCommand"
+    @on-back-clicked="toggleView"/>
 </template>
 
 <script>
-
+import CommandEdit from './CommandEdit'
 export default {
   name: 'CommandList',
+  components: { CommandEdit },
+  data () {
+    return {
+      selectedCommand: null,
+      isDetailView: true
+    }
+  },
   props: {
     commands: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    selectCommand (selectedCommand) {
+      this.selectedCommand = selectedCommand
+    },
+    toggleView () {
+      console.log('toggle view')
+      this.isDetailView = !this.isDetailView
+    }
+  },
+  computed: {
+    commandsLength () {
+      // revaluated each time reactive dependency change
+      return this.commands.length
+    },
+    toggleBtnClass () {
+      return this.isDetailView ? 'btn-warning' : 'btn-primary'
+    },
+    commandsAreNotEmpty () { return this.commandsLength > 0 },
+    activeCommand () {
+      return this.selectedCommand || (this.commandsAreNotEmpty && this.commands[0]) || null
     }
   }
 }

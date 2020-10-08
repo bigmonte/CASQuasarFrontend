@@ -5,6 +5,7 @@
 
 <script>
 import CommandList from '../components/CommandList'
+
 import { fetchCommands } from '../actions'
 
 export default {
@@ -19,6 +20,7 @@ export default {
   async created () {
     const commands = await fetchCommands()
     this.commands = commands
+    console.log(commands)
   }
 }
 </script>
