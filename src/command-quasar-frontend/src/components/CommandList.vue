@@ -42,7 +42,6 @@ export default {
       this.selectedCommand = selectedCommand
     },
     toggleView () {
-      console.log('toggle view')
       this.isDetailView = !this.isDetailView
     },
     refreshCommand (newCommand) {

@@ -1,8 +1,5 @@
 <script>
-import CommandEdit from './CommandEdit'
-
 export default {
-  components: [CommandEdit],
   props: {
     command: {
       type: Object

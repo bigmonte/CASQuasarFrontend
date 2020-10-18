@@ -21,7 +21,6 @@ export default {
   async created () {
     const commands = await fetchCommands()
     this.commands = commands
-    console.log(commands)
   }
 }
 </script>

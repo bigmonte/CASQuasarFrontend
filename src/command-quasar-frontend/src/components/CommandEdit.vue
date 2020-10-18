@@ -20,7 +20,6 @@ export default {
       try {
         const updatedCommand = await updateCommand(this.uCommand.id, this.uCommand)
         this.$emit('on-command-update', updatedCommand)
-        console.log(' submit ')
       } catch (error) {
         //  this.setAlert('error', error?.message)
         console.log('error')
@@ -31,17 +30,19 @@ export default {
 </script>
 <template>
 <div class="q-pa-md" style="max-width: 700px">
-  <div class="text-h6 text-blue">Edit command</div>
+  <div class="text-h6 text-white q-pa-sm text-grey">Edit command</div>
 <q-form
       class="q-gutter-md"
     >
       <q-input
+        label-color="info"
         filled
         type="text"
         v-model="uCommand.howTo"
         label="How To"
       ></q-input>
       <q-input
+        label-color="info"
         filled
         v-model="uCommand.commandLine"
         label="Command Line"
@@ -50,6 +51,7 @@ export default {
         :rules="[ val => val && val.length > 0 || 'Please type something']"
       ></q-input>
       <q-input
+        label-color="info"
         filled
         type="text"
         v-model="uCommand.platform"
@@ -58,7 +60,7 @@ export default {
       ></q-input>
       <div>
         <q-btn label="Update" type="update" color="primary" @click="onSubmit"></q-btn>
-        <q-btn label="Back" type="back" color="secondary" flat class="q-ml-sm" @click="handleClick"></q-btn>
+        <q-btn label="Back" type="back" color="primary" flat class="q-ml-sm" @click="handleClick"></q-btn>
       </div>
     </q-form>
 </div>
