@@ -61,6 +61,9 @@ export default {
     commandsAreNotEmpty () { return this.commandsLength > 0 },
     activeCommand () {
       return this.selectedCommand || (this.commandsAreNotEmpty && this.commands[0]) || null
+    },
+    activeCommandCopy () {
+      return this.selectedCommand
     }
   }
 }

@@ -5,6 +5,11 @@ export default {
       type: Object
     }
   },
+  data () {
+    return {
+      uCommand: { ...this.command }
+    }
+  },
   emits: ['on-edit-clicked'],
   methods: {
     onEditButtonClicked (selectedCommand) {
@@ -21,15 +26,15 @@ export default {
     <q-card-section >
       <div class="row">
         <div class="col">
-          <div class="text-h6 text-white q-ml-sm">{{command.howTo}}</div>
-          <div class="text text-white q-ml-sm">{{command.platform}}</div>
+          <div class="text-h6 text-white q-ml-sm">{{uCommand.howTo}}</div>
+          <div class="text text-white q-ml-sm">{{uCommand.platform}}</div>
           <div class="text text-green q-ml-sm q-mt-md">
-            <code>{{command.commandLine}}</code>
+            <code>{{uCommand.commandLine}}</code>
           </div>
         </div>
         <div class="col-xl">
           <q-btn flat round dense
-            @click="onEditButtonClicked(command)">
+            @click="onEditButtonClicked(uCommand)">
             <q-icon name="more_vert"></q-icon></q-btn></div>
       </div>
     </q-card-section>

@@ -33,6 +33,7 @@ export default {
   <div class="text-h6 text-white q-pa-sm text-grey">Edit command</div>
 <q-form
       class="q-gutter-md"
+      @submit.prevent="onSubmit"
     >
       <q-input
         label-color="info"
@@ -57,11 +58,10 @@ export default {
         v-model="uCommand.platform"
         label="Platform"
         hint="What is the platform being used for this command?"
-      ></q-input>
-      <div>
-        <q-btn label="Update" type="update" color="primary" @click="onSubmit"></q-btn>
-        <q-btn label="Back" type="back" color="primary" flat class="q-ml-sm" @click="handleClick"></q-btn>
-      </div>
+      >
+      </q-input>
+      <q-btn label="Update" type="submit" color="primary"></q-btn>
+      <q-btn label="Back" type="back" color="primary" flat class="q-ml-sm" @click="handleClick"></q-btn>
     </q-form>
 </div>
 </template>
