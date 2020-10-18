@@ -13,7 +13,6 @@ export default {
   emits: ['on-edit-clicked'],
   methods: {
     onEditButtonClicked (selectedCommand) {
-      console.log('trying to emit')
       this.$emit('on-edit-clicked', selectedCommand)
     }
   }

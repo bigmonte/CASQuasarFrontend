@@ -34,6 +34,7 @@ export default {
 <q-form
       class="q-gutter-md"
       @submit.prevent="onSubmit"
+      @back.prevent=""
     >
       <q-input
         label-color="info"
@@ -61,7 +62,8 @@ export default {
       >
       </q-input>
       <q-btn label="Update" type="submit" color="primary"></q-btn>
-      <q-btn label="Back" type="back" color="primary" flat class="q-ml-sm" @click="handleClick"></q-btn>
     </q-form>
+      <q-btn label="Back" type="back" color="primary" flat class="q-ml-sm" @click="handleClick"></q-btn>
+
 </div>
 </template>
