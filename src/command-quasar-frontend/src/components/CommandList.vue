@@ -3,7 +3,7 @@
       v-if="isDetailView">
       <q-scroll-area
         :visible=true
-        style="height: 600px; max-width: 100%;"
+        style="height: 600px; max-width: 50%;"
       >
         <div v-for="command in commands" :key="command.id" class="q-py-md">
           <q-card class="my-card text-black">

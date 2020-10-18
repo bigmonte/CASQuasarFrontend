@@ -1,10 +1,9 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
-      <q-toolbar>
-        <q-toolbar-title>
-          ASP.Net Command API
-        </q-toolbar-title>
+      <q-toolbar class="bg-primary glossy text-white">
+        <q-toolbar-title> Commands and Snippets </q-toolbar-title>
+        <menu-tabs/>
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -14,10 +13,11 @@
 </template>
 
 <script>
+import MenuTabs from '../components/shared/MenuTabs'
 
 export default {
   name: 'MainLayout',
-  components: {},
+  components: { MenuTabs },
   data () {
     return {}
   }
