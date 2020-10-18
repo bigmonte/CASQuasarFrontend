@@ -2,6 +2,10 @@
 
 Frontend for ASP.NET API Core 3.1
 
+## Preview: 
+
+![alt text](https://img.imageupload.net/2020/10/18/cas-quasar.png)
+
 ## Install the dependencies
 ```bash
 npm install
