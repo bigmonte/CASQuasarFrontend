@@ -1,9 +1,8 @@
-# CommandQuasarFrontend (command-quasar-frontend)
+# Commands and Snippets Frontend 
 
-Simple frontend demo for the command helper demo made in ASP.NET API Core 3.1 using quasar
+Frontend for the Commands and Snippets API, spawned with Quasar CLI. 
 
-![alt text](https://i.imgur.com/4Jio0TU.png)
-
+# Instructions
 
 ## Install the dependencies
 ```bash
