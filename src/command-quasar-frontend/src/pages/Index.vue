@@ -43,8 +43,19 @@ export default {
       if (!text.trim().length) {
         return
       }
+      console.log(this.example)
       this.commands = await searchCommands(text)
       this.selectedCommand = null
+    }
+  },
+  computed: {
+    example: {
+      get () {
+        return this.$store.state.commands.example
+      },
+      set (val) {
+        this.$store.commit('commands/example', val)
+      }
     }
   }
 }
