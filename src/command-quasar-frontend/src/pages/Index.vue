@@ -9,7 +9,7 @@ import CommandList from '../components/CommandList'
 
 import { fetchCommands, searchCommands } from '../actions'
 
-// TODO VUEX STORE 
+// TODO VUEX STORE
 
 export default {
   props: {

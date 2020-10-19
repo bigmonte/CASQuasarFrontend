@@ -2,17 +2,15 @@
   <q-layout view="lHh Lpr lFf" style="background-color: #3a4959">
     <q-header elevated>
       <q-toolbar class="bg-primary text-white">
-        <q-toolbar-title>   <router-link
-          class="q-btn flat"
-          :to="{name: 'root'}"
-          > Commands and Snippets </router-link></q-toolbar-title>
-        <menu-tabs
-          @on-text-clicked="handleTextClicked($event)"/>
+        <q-toolbar-title>
+          <router-link class="q-btn flat" :to="{ name: 'root' }">
+            Commands and Snippets
+          </router-link></q-toolbar-title >
+        <menu-tabs @on-text-clicked="handleTextClicked($event)" />
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <router-view
-      :searchText="text"/>
+      <router-view :searchText="text" />
     </q-page-container>
   </q-layout>
 </template>
