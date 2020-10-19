@@ -7,7 +7,7 @@
 <script>
 import CommandList from '../components/CommandList'
 
-import { fetchCommands, searchCommands } from '../actions'
+import { searchCommands } from '../actions'
 
 // TODO VUEX STORE
 
@@ -30,8 +30,7 @@ export default {
     }
   },
   async created () {
-    const commands = await fetchCommands()
-    this.commands = commands
+    this.$store.dispatch('commands/fetchCommands')
   },
   methods: {
     async handleSearch (text) {

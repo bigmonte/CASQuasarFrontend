@@ -10,3 +10,7 @@ export const updateExample = (state, toSet) => {
 export const updateCommands = (state, toSet) => {
   state.commandsData = toSet
 }
+
+export const addCommand = (state, commandToSet) => {
+  state.commandsData.push(commandToSet)
+}
