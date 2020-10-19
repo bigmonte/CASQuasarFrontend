@@ -14,13 +14,6 @@ export function createCommandRequest (command) {
     .catch((error) => Promise.reject(error))
 }
 
-export function deleteCommandRequest (id) {
-  return axios
-    .delete(`/api/commands/${id}`)
-    .then(res => res.data)
-    .catch((error) => Promise.reject(error))
-}
-
 export function searchCommands (searchTitle) {
   return axios.get(`/api/commands/search/${searchTitle}`)
     .then(res => { return res.data })

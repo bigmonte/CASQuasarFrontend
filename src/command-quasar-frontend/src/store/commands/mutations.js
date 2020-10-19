@@ -11,6 +11,10 @@ export const updateCommands = (state, toSet) => {
   state.commandsData = toSet
 }
 
+export const removeFromIndex = (state, index) => {
+  state.commandsData.splice(index, 1)
+}
+
 export const addCommand = (state, commandToSet) => {
   state.commandsData.push(commandToSet)
 }
