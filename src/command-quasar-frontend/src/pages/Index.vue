@@ -7,9 +7,14 @@
 <script>
 import CommandList from '../components/CommandList'
 
-import { fetchCommands } from '../actions'
+import { fetchCommands, searchCommands } from '../actions'
+
+// TODO VUEX STORE 
 
 export default {
+  props: {
+    searchText: String
+  },
   components: { CommandList },
   data () {
     return {
@@ -18,9 +23,29 @@ export default {
       commands: []
     }
   },
+  watch: {
+    searchText: function (text) {
+      if (text) {
+        this.handleSearch(text)
+      }
+    }
+  },
   async created () {
     const commands = await fetchCommands()
     this.commands = commands
+  },
+  methods: {
+    async handleSearch (text) {
+      if (!text) {
+        this.getCommands()
+        return
+      }
+      if (!text.trim().length) {
+        return
+      }
+      this.commands = await searchCommands(text)
+      this.selectedCommand = null
+    }
   }
 }
 </script>

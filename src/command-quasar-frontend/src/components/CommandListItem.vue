@@ -17,7 +17,6 @@ export default {
       this.$emit('on-edit-clicked', this.command)
     },
     async deleteCommand () {
-      debugger
       const deletedCommand = await deleteCommandRequest(this.uCommand.id)
       this.$emit('on-command-delete', deletedCommand)
     }

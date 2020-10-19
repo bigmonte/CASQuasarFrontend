@@ -6,15 +6,16 @@
           class="q-btn flat"
           :to="{name: 'root'}"
           > Commands and Snippets </router-link></q-toolbar-title>
-        <menu-tabs/>
+        <menu-tabs
+          @on-text-clicked="handleTextClicked($event)"/>
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <router-view />
+      <router-view
+      :searchText="text"/>
     </q-page-container>
   </q-layout>
 </template>
-
 <script>
 import MenuTabs from '../components/shared/MenuTabs'
 
@@ -22,7 +23,14 @@ export default {
   name: 'MainLayout',
   components: { MenuTabs },
   data () {
-    return {}
+    return {
+      text: ''
+    }
+  },
+  methods: {
+    handleTextClicked (text) {
+      this.text = text
+    }
   }
 }
 </script>
