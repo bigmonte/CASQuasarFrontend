@@ -4,7 +4,8 @@
         <div v-for="command in commands" :key="command.id" class="q-py-md">
           <command-list-item
             :command='command'
-            @on-edit-clicked="onEditButtonClicked"/>
+            @on-edit-clicked="onEditButtonClicked"
+            @on-command-delete="refreshDeletedCommandViewData($event)"/>
         </div>
   </div>
   <command-edit
@@ -48,6 +49,11 @@ export default {
       const index = this.commands.findIndex(r => r.id === newCommand.id)
       this.commands[index] = newCommand
       this.selectedCommand = newCommand
+    },
+    refreshDeletedCommandViewData (deletedCommand) {
+      const index = this.commands.findIndex(r => r.id === deletedCommand.id)
+      this.commands.splice(index, 1)
+      this.selectCommand(this.commands[0] || null)
     }
   },
   computed: {
@@ -68,9 +74,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-  .my-card
-    width: 100%
-    max-width: 70%
-</style>

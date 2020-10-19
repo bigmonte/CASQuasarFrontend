@@ -19,3 +19,10 @@ export function createCommandRequest (command) {
     .then(res => res.data)
     .catch((error) => Promise.reject(error))
 }
+
+export function deleteCommandRequest (id) {
+  return axios
+    .delete(`/api/commands/${id}`)
+    .then(res => res.data)
+    .catch((error) => Promise.reject(error))
+}
