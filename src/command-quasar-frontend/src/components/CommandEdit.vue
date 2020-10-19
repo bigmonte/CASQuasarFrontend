@@ -1,69 +1,41 @@
 <script>
-import { updateCommand } from '../actions'
+import CommandForm from './CommandForm'
+import { updateCommandRequest } from '../actions'
 export default {
   props: {
     command: {
       type: Object
     }
   },
+  components: { CommandForm },
+  emits: ['on-back-clicked', 'on-command-update'],
   data () {
     return {
-      uCommand: { ...this.command }
+      formTitle: 'Edit Command'
     }
   },
-  emit: ['on-back-clicked', 'on-command-update'],
   methods: {
-    handleClick: function () {
-      this.$emit('on-back-clicked')
-    },
-    async onSubmit () {
+    async onFormSubmit (command) {
+      console.log(command.id)
       try {
-        const updatedCommand = await updateCommand(this.uCommand.id, this.uCommand)
+        const updatedCommand = await updateCommandRequest(command.id, command)
         this.$emit('on-command-update', updatedCommand)
       } catch (error) {
         //  this.setAlert('error', error?.message)
         console.log('error')
       }
+    },
+    onBackClicked () {
+      this.$emit('on-back-clicked')
     }
   }
 }
 </script>
-<template>
-<div class="q-pa-md" style="max-width: 700px">
-  <div class="text-h6 text-white q-pa-sm text-grey">Edit command</div>
-<q-form
-      class="q-gutter-md"
-      @submit.prevent="onSubmit"
-      @back.prevent=""
-    >
-      <q-input
-        label-color="info"
-        filled
-        type="text"
-        v-model="uCommand.howTo"
-        label="How To"
-      ></q-input>
-      <q-input
-        label-color="info"
-        filled
-        v-model="uCommand.commandLine"
-        label="Command Line"
-        hint="Command Line Interface associated with the command"
-        lazy-rules
-        :rules="[ val => val && val.length > 0 || 'Please type something']"
-      ></q-input>
-      <q-input
-        label-color="info"
-        filled
-        type="text"
-        v-model="uCommand.platform"
-        label="Platform"
-        hint="What is the platform being used for this command?"
-      >
-      </q-input>
-      <q-btn label="Update" type="submit" color="primary"></q-btn>
-    </q-form>
-      <q-btn label="Back" type="back" color="primary" flat class="q-ml-sm" @click="handleClick"></q-btn>
 
-</div>
+<template>
+<command-form
+    :command="command"
+    :formTitle="formTitle"
+    @on-form-submit="onFormSubmit($event)"
+    @on-back-clicked="onBackClicked"/>
 </template>

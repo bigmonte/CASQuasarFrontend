@@ -2,7 +2,10 @@
   <q-layout view="lHh Lpr lFf" style="background-color: #3a4959">
     <q-header elevated>
       <q-toolbar class="bg-primary text-white">
-        <q-toolbar-title> Commands and Snippets </q-toolbar-title>
+        <q-toolbar-title>   <router-link
+          class="q-btn flat"
+          :to="{name: 'root'}"
+          > Commands and Snippets </router-link></q-toolbar-title>
         <menu-tabs/>
       </q-toolbar>
     </q-header>

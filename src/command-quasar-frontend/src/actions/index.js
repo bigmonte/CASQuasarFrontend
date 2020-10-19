@@ -6,9 +6,16 @@ export function fetchCommands () {
       return res.data
     })
 }
-export function updateCommand (id, command) {
+export function updateCommandRequest (id, command) {
   return axios
     .put(`/api/commands/${id}`, command)
     .then(res => { return res.data })
+    .catch((error) => Promise.reject(error))
+}
+
+export function createCommandRequest (command) {
+  return axios
+    .post('/api/commands', command)
+    .then(res => res.data)
     .catch((error) => Promise.reject(error))
 }

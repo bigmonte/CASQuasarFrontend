@@ -20,7 +20,7 @@ import CommandEdit from './CommandEdit'
 
 export default {
   name: 'CommandList',
-  components: { CommandEdit, CommandListItem },
+  components: { CommandListItem, CommandEdit },
   data () {
     return {
       selectedCommand: null,

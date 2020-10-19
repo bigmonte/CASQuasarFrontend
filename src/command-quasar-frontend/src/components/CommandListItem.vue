@@ -13,7 +13,7 @@ export default {
   emits: ['on-edit-clicked'],
   methods: {
     onEditButtonClicked (selectedCommand) {
-      this.$emit('on-edit-clicked', selectedCommand)
+      this.$emit('on-edit-clicked', this.command)
     }
   }
 }
@@ -25,15 +25,15 @@ export default {
     <q-card-section >
       <div class="row">
         <div class="col">
-          <div class="text-h6 text-white q-ml-sm">{{uCommand.howTo}}</div>
-          <div class="text text-white q-ml-sm">{{uCommand.platform}}</div>
+          <div class="text-h6 text-white q-ml-sm">{{command.howTo}}</div>
+          <div class="text text-white q-ml-sm">{{command.platform}}</div>
           <div class="text text-green q-ml-sm q-mt-md">
-            <code>{{uCommand.commandLine}}</code>
+            <code>{{command.commandLine}}</code>
           </div>
         </div>
         <div class="col-xl">
           <q-btn flat round dense
-            @click="onEditButtonClicked(uCommand)">
+            @click="onEditButtonClicked(command)">
             <q-icon name="more_vert"></q-icon></q-btn></div>
       </div>
     </q-card-section>
