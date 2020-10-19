@@ -19,8 +19,7 @@ export default {
   data () {
     return {
       isDetailView: true,
-      selectedCommand: null,
-      commands: []
+      selectedCommand: null
     }
   },
   watch: {
@@ -43,18 +42,17 @@ export default {
       if (!text.trim().length) {
         return
       }
-      console.log(this.example)
       this.commands = await searchCommands(text)
       this.selectedCommand = null
     }
   },
   computed: {
-    example: {
+    commands: {
       get () {
-        return this.$store.state.commands.example
+        return this.$store.state.commands.commandsData
       },
       set (val) {
-        this.$store.commit('commands/example', val)
+        this.$store.commit('commands/updateCommands', val)
       }
     }
   }

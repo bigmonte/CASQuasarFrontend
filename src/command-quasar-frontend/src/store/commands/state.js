@@ -1,6 +1,7 @@
 export default function () {
   return {
     //
-    example: false
+    example: false,
+    commandsData: []
   }
 }
