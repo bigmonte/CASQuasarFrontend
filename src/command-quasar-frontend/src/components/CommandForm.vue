@@ -19,7 +19,7 @@ export default {
       this.$emit('on-back-clicked')
     },
     onFormSubmit () {
-      this.$emit('on-form-submit"', this.uCommand)
+      this.$emit('on-form-submit', this.uCommand)
     }
   }
 }

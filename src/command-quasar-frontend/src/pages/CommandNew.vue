@@ -14,10 +14,11 @@ export default {
   },
   methods: {
     async submitCreateForm (commandToCreate) {
+      console.log('submiting new command')
       try {
         await createCommandRequest(commandToCreate)
         // this.setAlert('success', 'Command created!')
-        this.$router.push({ name: 'commandHomePage' })
+        this.$router.push({ name: 'root' })
       } catch (error) {
         console.log('error creating command')
         // this.setAlert('error', error?.message)
@@ -29,8 +30,7 @@ export default {
 
 <template>
   <command-form
-    :alert="alert"
     :formTitle="`${'Add command'}`"
-    @on-form-submit="submitCreateForm"
+    @on-form-submit="submitCreateForm($event) "
     @on-back-clicked="$router.go(-1)" />
 </template>
