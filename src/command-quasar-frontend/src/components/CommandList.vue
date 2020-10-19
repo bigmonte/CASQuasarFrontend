@@ -57,19 +57,10 @@ export default {
     }
   },
   computed: {
-    commandsLength () {
-      // revaluated each time reactive dependency change
-      return this.commands.length
-    },
-    toggleBtnClass () {
-      return this.isDetailView ? 'btn-warning' : 'btn-primary'
-    },
+    // revaluated each time reactive dependency change
     commandsAreNotEmpty () { return this.commandsLength > 0 },
     activeCommand () {
       return this.selectedCommand || (this.commandsAreNotEmpty && this.commands[0]) || null
-    },
-    activeCommandCopy () {
-      return this.selectedCommand
     }
   }
 }
