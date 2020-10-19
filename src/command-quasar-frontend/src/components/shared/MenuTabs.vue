@@ -2,7 +2,8 @@
 export default {
   data () {
     return {
-      text: ''
+      text: '',
+      tab: 'commands'
     }
   },
   emits: ['on-text-clicked'],
@@ -38,7 +39,9 @@ export default {
     <router-link :to="{ name: 'CommandNew' }" class="q-btn flat round dense">
       <q-icon name="add" color="white"></q-icon>
     </router-link>
-    <q-tab name="Commands" label="Commands" active="true"></q-tab>
-    <q-tab name="Snippets" label="Snippets"></q-tab>
+    <q-tabs v-model="tab">
+      <q-tab name="commands" label="Commands"></q-tab>
+      <q-tab name="snippets" label="Snippets"></q-tab>
+    </q-tabs>
   </q-tabs>
 </template>
