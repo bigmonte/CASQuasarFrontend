@@ -25,7 +25,7 @@ export default {
   },
   methods: {
     async handleSearch (text) {
-      if (this.$store.getters['commands/canSearch']) {
+      if (this.canSearch) {
         this.$store.dispatch('commands/fetchSearchData')
         this.searchingCommands = true
         this.selectedCommand = null
@@ -33,13 +33,18 @@ export default {
     }
   },
   computed: {
+    canSearch: {
+      get () {
+        return this.$store.getters['commands/canSearch']
+      }
+    },
     commands: {
       get () {
-        if (this.$store.getters['commands/canSearch']) return this.$store.state.commands.searchData
+        if (this.canSearch) return this.$store.state.commands.searchData
         return this.$store.state.commands.commandsData
       },
       set (val) {
-        if (!this.$store.getters['commands/canSearch']) this.$store.commit('commands/updateCommands', val)
+        if (!this.canSearch) this.$store.commit('commands/updateCommands', val)
       }
     },
     searchText: {
