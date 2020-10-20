@@ -1,6 +1,6 @@
 <template>
   <div>
-    <command-list :commands='commands' />
+    <command-list/>
   </div>
 </template>
 

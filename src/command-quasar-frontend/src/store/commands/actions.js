@@ -13,13 +13,13 @@ export async function fetchCommands (context) {
 
 // Remove command from API/DB
 export async function removeCommand (context, command) {
-  await deleteCommandRequest(command.id)
-  const index = this.state.commands.commandsData.findIndex(r => r.id === command.id)
+  const delCmd = await deleteCommandRequest(command.id)
+  const index = this.state.commands.commandsData.findIndex(r => r.id === delCmd.id)
   context.commit('removeFromIndex', index)
 }
 
 async function deleteCommandRequest (id) {
-  return Vue.prototype.$axios
+  return await Vue.prototype.$axios
     .delete(`/api/commands/${id}`)
     .then(res => res.data)
     .catch((error) => Promise.reject(error))
@@ -31,6 +31,16 @@ export async function createCommand (context, command) {
     .post('/api/commands', command)
     .then(res => res.data)
     .catch((error) => Promise.reject(error))
+}
+
+// Update command
+export async function updateCommand (context, command) {
+  const updatedCommand = await Vue.prototype.$axios
+    .put(`/api/commands/${command.id}`, command)
+    .then(res => { return res.data })
+    .catch((error) => Promise.reject(error))
+  context.commit('replaceCommandAtIndex', updatedCommand)
+  return updatedCommand
 }
 
 // Search API

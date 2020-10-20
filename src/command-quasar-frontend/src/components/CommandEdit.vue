@@ -1,6 +1,5 @@
 <script>
 import CommandForm from './CommandForm'
-import { updateCommandRequest } from '../actions'
 export default {
   props: {
     command: {
@@ -8,7 +7,7 @@ export default {
     }
   },
   components: { CommandForm },
-  emits: ['on-back-clicked', 'on-command-update'],
+  emits: ['on-back-clicked'],
   data () {
     return {
       formTitle: 'Edit Command'
@@ -16,14 +15,7 @@ export default {
   },
   methods: {
     async onFormSubmit (command) {
-      console.log(command.id)
-      try {
-        const updatedCommand = await updateCommandRequest(command.id, command)
-        this.$emit('on-command-update', updatedCommand)
-      } catch (error) {
-        //  this.setAlert('error', error?.message)
-        console.log('error')
-      }
+      await this.$store.dispatch('commands/updateCommand', command)
     },
     onBackClicked () {
       this.$emit('on-back-clicked')

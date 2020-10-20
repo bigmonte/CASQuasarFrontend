@@ -12,6 +12,11 @@ export const addCommand = (state, commandToSet) => {
   state.commandsData.push(commandToSet)
 }
 
+export const replaceCommandAtIndex = (state, commandToReplace) => {
+  const index = state.commandsData.findIndex(r => r.id === commandToReplace.id)
+  state.commandsData[index] = commandToReplace
+}
+
 // Search commands state
 
 export const updateSearchText = (state, toSet) => {

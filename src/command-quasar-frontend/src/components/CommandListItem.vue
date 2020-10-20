@@ -10,7 +10,7 @@ export default {
       uCommand: { ...this.command }
     }
   },
-  emits: ['on-edit-clicked', 'on-command-delete'],
+  emits: ['on-edit-clicked'],
   methods: {
     onEditButtonClicked (selectedCommand) {
       this.$emit('on-edit-clicked', this.command)
