@@ -7,13 +7,6 @@ export function updateCommandRequest (id, command) {
     .catch((error) => Promise.reject(error))
 }
 
-export function createCommandRequest (command) {
-  return axios
-    .post('/api/commands', command)
-    .then(res => res.data)
-    .catch((error) => Promise.reject(error))
-}
-
 export function searchCommands (searchTitle) {
   return axios.get(`/api/commands/search/${searchTitle}`)
     .then(res => { return res.data })

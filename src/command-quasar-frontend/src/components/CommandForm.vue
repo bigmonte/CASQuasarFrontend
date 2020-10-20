@@ -2,7 +2,8 @@
 export default {
   props: {
     command: {
-      type: Object
+      type: Object,
+      default: () => {}
     },
     formTitle: {
       type: String
