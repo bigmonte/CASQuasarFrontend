@@ -1,7 +1,9 @@
 export default function () {
   return {
     //
-    example: false,
+    searchText: '',
+    searching: false,
+    searchData: [],
     commandsData: []
   }
 }

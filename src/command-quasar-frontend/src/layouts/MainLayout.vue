@@ -6,11 +6,11 @@
           <router-link class="q-btn flat" :to="{ name: 'root' }">
             Commands and Snippets
           </router-link></q-toolbar-title >
-        <menu-tabs @on-text-clicked="handleTextClicked($event)" />
+        <menu-tabs/>
       </q-toolbar>
     </q-header>
     <q-page-container>
-      <router-view :searchText="text" />
+      <router-view/>
     </q-page-container>
   </q-layout>
 </template>

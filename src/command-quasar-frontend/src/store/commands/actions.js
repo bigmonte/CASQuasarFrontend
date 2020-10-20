@@ -8,6 +8,13 @@ export async function fetchCommands (context) {
   context.commit('updateCommands', commands)
 }
 
+export async function fetchSearchData (context) {
+  const searchText = this.state.commands.searchText
+  const commands = await Vue.prototype.$axios.get(`/api/commands/search/${searchText}`)
+    .then(res => { return res.data })
+  context.commit('updateSearchData', commands)
+}
+
 export async function removeCommand (context, command) {
   await deleteCommandRequest(command.id)
   const index = this.state.commands.commandsData.findIndex(r => r.id === command.id)

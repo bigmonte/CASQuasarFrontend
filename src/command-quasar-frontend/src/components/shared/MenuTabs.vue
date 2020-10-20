@@ -2,14 +2,18 @@
 export default {
   data () {
     return {
-      text: '',
+      searchText: '',
       tab: 'commands'
     }
   },
-  emits: ['on-text-clicked'],
+  watch: {
+    searchText: function (text) {
+      this.setSearchText(text)
+    }
+  },
   methods: {
-    onSearchInputHandled (text) {
-      this.$emit('on-text-clicked', text)
+    setSearchText (text) {
+      this.$store.commit('commands/updateSearchText', text)
     }
   }
 }
@@ -20,18 +24,17 @@ export default {
     <q-input
       dark
       borderless
-      v-model="text"
+      v-model="searchText"
       input-class="text-right"
       class="q-ml-md"
-      @keyup="onSearchInputHandled($event.target.value)"
     >
       <template v-slot:append>
-        <q-icon v-if="text === ''" name="search"></q-icon>
+        <q-icon v-if="searchText === ''" name="search"></q-icon>
         <q-icon
           v-else
           name="clear"
           class="cursor-pointer"
-          @click="text = ''"
+          @click="setSearchText('')"
         ></q-icon>
       </template>
       <q-space />
