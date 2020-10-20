@@ -1,15 +1,18 @@
-/*
-export function someMutation (state) {
-}
-*/
-
-export const updateExample = (state, toSet) => {
-  state.example = toSet
-}
+// Commands state
 
 export const updateCommands = (state, toSet) => {
   state.commandsData = toSet
 }
+
+export const removeFromIndex = (state, index) => {
+  state.commandsData.splice(index, 1)
+}
+
+export const addCommand = (state, commandToSet) => {
+  state.commandsData.push(commandToSet)
+}
+
+// Search commands state
 
 export const updateSearchText = (state, toSet) => {
   state.searchText = toSet
@@ -21,12 +24,4 @@ export const updateSearching = (state, toSet) => {
 
 export const updateSearchData = (state, toSet) => {
   state.searchData = toSet
-}
-
-export const removeFromIndex = (state, index) => {
-  state.commandsData.splice(index, 1)
-}
-
-export const addCommand = (state, commandToSet) => {
-  state.commandsData.push(commandToSet)
 }

@@ -25,35 +25,21 @@ export default {
   },
   methods: {
     async handleSearch (text) {
-      if (!text) {
-        this.searchingCommands = false
-        return
+      if (this.$store.getters['commands/canSearch']) {
+        this.$store.dispatch('commands/fetchSearchData')
+        this.searchingCommands = true
+        this.selectedCommand = null
       }
-      if (!text.trim().length) {
-        this.searchingCommands = false
-        return
-      }
-      this.$store.dispatch('commands/fetchSearchData')
-      this.searchingCommands = true
-      this.selectedCommand = null
     }
   },
   computed: {
-    searchingCommands: {
-      get () {
-        return this.$store.state.commands.searching
-      },
-      set (val) {
-        this.$store.commit('commands/updateSearching', val)
-      }
-    },
     commands: {
       get () {
-        if (this.searchingCommands) return this.$store.state.commands.searchData
+        if (this.$store.getters['commands/canSearch']) return this.$store.state.commands.searchData
         return this.$store.state.commands.commandsData
       },
       set (val) {
-        if (!this.searchingCommands) this.$store.commit('commands/updateCommands', val)
+        if (!this.$store.getters['commands/canSearch']) this.$store.commit('commands/updateCommands', val)
       }
     },
     searchText: {
