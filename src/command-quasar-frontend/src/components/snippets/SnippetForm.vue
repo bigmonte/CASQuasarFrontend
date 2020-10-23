@@ -55,8 +55,8 @@ export default {
             label-color="info"
             filled
             v-model="uSnippet.codeSnippet"
-            label="Snippet Line"
-            hint="Snippet Line Interface associated with the snippet"
+            label="Code you want to store"
+            hint="A useful snippet code"
             lazy-rules
             :rules="[
               (val) => (val && val.length > 0) || 'Field cannot be empty',
@@ -68,7 +68,7 @@ export default {
             type="text"
             v-model="uSnippet.platform"
             label="Platform"
-            hint="What is the platform being used for this snippet?"
+            hint="What is the language/platform being used for this snippet?"
             :rules="[
               (val) => (val && val.length > 0) || 'Field cannot be empty',
             ]"

@@ -3,7 +3,8 @@ export default {
   data () {
     return {
       searchText: '',
-      tab: 'commands'
+      tab: 'commands',
+      currentRoute: 'commands' // default
     }
   },
   watch: {
@@ -13,7 +14,21 @@ export default {
   },
   methods: {
     setSearchText (text) {
-      this.$store.commit('commands/updateSearchText', text)
+      if (this.currentRoute === 'commands') {
+        this.$store.commit('commands/updateSearchText', text)
+      }
+      if (this.currentRoute === 'snippets') {
+        this.$store.commit('snippets/updateSearchText', text)
+      }
+    },
+    getAddRoute () {
+      if ('name' in this.$route) {
+        if (this.$route.name === 'root') this.addRoute = `${this.currentRoute}New`
+        if (this.$route.name === 'commands') this.addRoute = `${this.currentRoute}New`
+        if (this.$route.name === 'snippets') this.addRoute = `${this.currentRoute}New`
+        // return `${this.$route.name}New`
+        return this.addRoute
+      }
     }
   }
 }
@@ -39,7 +54,7 @@ export default {
       </template>
       <q-space />
     </q-input>
-    <router-link :to="{ name: 'CommandNew' }" class="q-btn flat round dense">
+    <router-link :to="{ name: `${getAddRoute()}` }" class="q-btn flat round dense">
       <q-icon name="add" color="white"></q-icon>
     </router-link>
     <q-tabs>

@@ -12,7 +12,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'commands', component: () => import('pages/Commands.vue') },
-      { path: 'new', name: 'CommandNew', component: () => import('pages/CommandNew.vue') }
+      { path: 'new', name: 'commandsNew', component: () => import('pages/CommandNew.vue') }
     ]
   },
   {
@@ -20,7 +20,7 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'snippets', component: () => import('pages/Snippets.vue') },
-      { path: 'new', name: 'SnippetNew', component: () => import('pages/SnippetNew.vue') }
+      { path: 'new', name: 'snippetsNew', component: () => import('pages/SnippetNew.vue') }
     ]
   },
 
