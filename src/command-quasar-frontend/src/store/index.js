@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import commands from './commands'
+import snippets from './snippets'
+
 // import example from './module-example'
 
 Vue.use(Vuex)
@@ -17,7 +19,8 @@ Vue.use(Vuex)
 export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
-      commands
+      commands,
+      snippets
     },
 
     // enable strict mode (adds overhead!)
@@ -28,7 +31,8 @@ export default function (/* { ssrContext } */) {
   if (process.env.DEV && module.hot) {
     module.hot.accept(['./commands'], () => {
       const newCommands = require('./commands').default
-      Store.hotUpdate({ modules: { commands: newCommands } })
+      const newSnippets = require('./snippets').default
+      Store.hotUpdate({ modules: { commands: newCommands, snippets: newSnippets } })
     })
   }
 
