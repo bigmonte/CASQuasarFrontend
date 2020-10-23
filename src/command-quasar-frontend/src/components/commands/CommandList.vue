@@ -48,7 +48,7 @@ export default {
     }
   },
   async created () {
-    this.$store.dispatch('commands/fetchCommands')
+    await this.$store.dispatch('commands/fetchCommands')
   },
   computed: {
     canSearch: {

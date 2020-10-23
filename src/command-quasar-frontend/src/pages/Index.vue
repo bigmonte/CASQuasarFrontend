@@ -12,41 +12,38 @@
         height="300px"
         class="bg-primary text-white shadow-1 rounded-borders"
       >
-        <q-carousel-slide name="style" class="column no-wrap flex-center">
-          <q-icon name="style" size="56px"></q-icon>
-          <div class="q-mt-md text-center">
-            AHAAHAHAHH
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide name="tv" class="column no-wrap flex-center">
-          <q-icon name="live_tv" size="56px"></q-icon>
-          <div class="q-mt-md text-center">
-            ASDASDASHDJASDjk
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide name="layers" class="column no-wrap flex-center">
-          <q-icon name="layers" size="56px"></q-icon>
-          <div class="q-mt-md text-center">
-            ASFLKASJFASKFJKASLF
-          </div>
-        </q-carousel-slide>
-        <q-carousel-slide name="map" class="column no-wrap flex-center">
-          <q-icon name="terrain" size="56px"></q-icon>
-          <div class="q-mt-md text-center">
-            ASFKJASHFIUOo21789961827
-          </div>
-        </q-carousel-slide>
+      <template v-for="command in commands">
+        <slide-item
+          :key="command.id"
+          :name="command.id"
+          :title="command.howTo"
+          :subtitle="command.platform"
+          :content="command.commandLine"/>
+      </template>
       </q-carousel>
 </template>
 
 <script>
-
+import SlideItem from '../components/SlideItem'
 export default {
+  components: { SlideItem },
   data () {
     return {
-      slide: 'style',
+      slide: '0',
       isDetailView: true,
       selectedCommand: null
+    }
+  },
+  async created () {
+    await this.$store.dispatch('commands/fetchCommands')
+    this.slide = this.commands[0].id
+  },
+  computed: {
+    commands: {
+      get () {
+        if (this.canSearch) return this.$store.state.commands.searchData
+        return this.$store.state.commands.commandsData
+      }
     }
   }
 }
