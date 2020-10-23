@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import CommandList from '../components/CommandList'
+import CommandList from '../components/commands/CommandList'
 
 export default {
   components: { CommandList },

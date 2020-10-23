@@ -1,5 +1,5 @@
 <script>
-import CommandForm from '../components/CommandForm'
+import CommandForm from '../components/commands/CommandForm'
 
 export default {
   components: { CommandForm },
