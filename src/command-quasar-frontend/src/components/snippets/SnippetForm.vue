@@ -47,17 +47,7 @@ export default {
             type="text"
             v-model="uSnippet.howTo"
             label="How To"
-            :rules="[
-              (val) => (val && val.length > 0) || 'Field cannot be empty',
-            ]"
-          ></q-input>
-          <q-input
-            label-color="info"
-            filled
-            v-model="uSnippet.codeSnippet"
-            label="Code you want to store"
-            hint="A useful snippet code"
-            lazy-rules
+            hint="Short description of the snippet"
             :rules="[
               (val) => (val && val.length > 0) || 'Field cannot be empty',
             ]"
@@ -74,6 +64,20 @@ export default {
             ]"
           >
           </q-input>
+                    <q-input
+            label-color="info"
+            type="textarea"
+            filled
+            autogrow
+            clearable
+            v-model="uSnippet.codeSnippet"
+            label="Code you want to store"
+            hint="A useful snippet code"
+            lazy-rules
+            :rules="[
+              (val) => (val && val.length > 0) || 'Field cannot be empty',
+            ]"
+          ></q-input>
           <q-btn type="submit" color="primary">{{ formTitle }}</q-btn>
         </q-form>
       </div>

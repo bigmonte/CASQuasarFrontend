@@ -47,17 +47,7 @@ export default {
             type="text"
             v-model="uCommand.howTo"
             label="How To"
-            :rules="[
-              (val) => (val && val.length > 0) || 'Field cannot be empty',
-            ]"
-          ></q-input>
-          <q-input
-            label-color="info"
-            filled
-            v-model="uCommand.commandLine"
-            label="Command Line"
-            hint="Command Line Interface associated with the command"
-            lazy-rules
+            hint="Short description of the command purpose"
             :rules="[
               (val) => (val && val.length > 0) || 'Field cannot be empty',
             ]"
@@ -74,6 +64,17 @@ export default {
             ]"
           >
           </q-input>
+          <q-input
+            label-color="info"
+            filled
+            v-model="uCommand.commandLine"
+            label="Command"
+            hint="The command you want to store"
+            lazy-rules
+            :rules="[
+              (val) => (val && val.length > 0) || 'Field cannot be empty',
+            ]"
+          ></q-input>
           <q-btn type="submit" color="primary">{{ formTitle }}</q-btn>
         </q-form>
       </div>
