@@ -8,11 +8,11 @@ export const removeFromIndex = (state, index) => {
   state.snippetsData.splice(index, 1)
 }
 
-export const addCommand = (state, snippetToSet) => {
+export const addSnippet = (state, snippetToSet) => {
   state.snippetsData.push(snippetToSet)
 }
 
-export const replaceCommandAtIndex = (state, snippetToReplace) => {
+export const replaceSnippetAtIndex = (state, snippetToReplace) => {
   const index = state.snippetsData.findIndex(r => r.id === snippetToReplace.id)
   state.snippetsData[index] = snippetToReplace
 }
