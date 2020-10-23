@@ -1,6 +1,6 @@
 <template>
   <q-carousel
-        v-model="slide"
+        v-model="currentSlide"
         transition-prev="scale"
         transition-next="scale"
         swipeable
@@ -29,19 +29,18 @@ export default {
   components: { SlideItem },
   data () {
     return {
-      slide: '0',
+      currentSlide: '0',
       isDetailView: true,
       selectedCommand: null
     }
   },
   async created () {
     await this.$store.dispatch('commands/fetchCommands')
-    this.slide = this.commands[0].id
+    this.currentSlide = this.commands[0].id
   },
   computed: {
     commands: {
       get () {
-        if (this.canSearch) return this.$store.state.commands.searchData
         return this.$store.state.commands.commandsData
       }
     }
