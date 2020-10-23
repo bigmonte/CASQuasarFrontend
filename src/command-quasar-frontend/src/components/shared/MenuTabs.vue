@@ -18,7 +18,7 @@ export default {
     }
   },
   computed: {
-    canShowSearch: {
+    canShowSearchOrAdd: {
       get () {
         if ('name' in this.$route) {
           return (this.$route.name === 'commands' || this.$route.name === 'snippets')
@@ -34,7 +34,9 @@ export default {
   <q-tabs shrink>
     <search
       v-if="canShowSearch"/>
-    <router-link :to="{ name: `${getAddRoute()}` }" class="q-btn flat round dense">
+    <router-link
+      v-if="canShowSearchOrAdd"
+      :to="{ name: `${getAddRoute()}` }" class="q-btn flat round dense">
       <q-icon name="add" color="white"></q-icon>
     </router-link>
     <q-tabs>
