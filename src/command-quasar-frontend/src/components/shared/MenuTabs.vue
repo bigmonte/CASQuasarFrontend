@@ -22,12 +22,15 @@ export default {
       }
     },
     getAddRoute () {
+      // A bit hacky in order to reuse currentRoute to set the search text (root defaults to commands search for now)
+      // we also want to filter other routes (currentRoute only can be 'top level' route)
+
       if ('name' in this.$route) {
-        if (this.$route.name === 'root') this.addRoute = `${this.currentRoute}New`
-        if (this.$route.name === 'commands') this.addRoute = `${this.currentRoute}New`
-        if (this.$route.name === 'snippets') this.addRoute = `${this.currentRoute}New`
-        // return `${this.$route.name}New`
-        return this.addRoute
+        if (this.$route.name === 'root') this.currentRoute = 'commands'
+        if (this.$route.name === 'commands') this.currentRoute = this.$route.name
+        if (this.$route.name === 'snippets') this.currentRoute = this.$route.name
+
+        return `${this.currentRoute}New`
       }
     }
   }
