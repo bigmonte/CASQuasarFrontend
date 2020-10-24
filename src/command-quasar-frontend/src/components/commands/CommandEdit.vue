@@ -16,16 +16,11 @@ export default {
   },
   methods: {
     async onFormSubmit (command) {
-      try {
-        if (this.command.isEqual(command)) { // TODO make it simpler
-          this.$store.dispatch('logger/addMessage', 'No changes detected!', true)
-          return
-        }
-        await this.$store.dispatch('commands/updateCommand', command)
-        this.$store.dispatch('logger/addMessage', `Command Edited: id-${command.id}`, false)
-      } catch (error) {
-        this.$store.dispatch('logger/addMessage', error, true)
+      if (this.command.isEqual(command)) { // TODO make it simpler
+        this.$store.dispatch('logger/addMessage', 'No changes detected!', true)
+        return
       }
+      await this.$store.dispatch('commands/updateCommand', command)
     },
     onBackClicked () {
       this.$emit('on-back-clicked')

@@ -15,12 +15,7 @@ export default {
   },
   methods: {
     async onFormSubmit (snippet) {
-      try {
-        await this.$store.dispatch('snippets/updateSnippet', snippet)
-        this.$store.dispatch('logger/addMessage', `Snippet Edited: ${snippet.id}`, false)
-      } catch (error) {
-        this.$store.dispatch('logger/addMessage', error, true)
-      }
+      await this.$store.dispatch('snippets/updateSnippet', snippet)
     },
     onBackClicked () {
       this.$emit('on-back-clicked')
