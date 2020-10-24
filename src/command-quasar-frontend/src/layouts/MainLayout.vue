@@ -12,39 +12,16 @@
     <q-page-container>
       <router-view/>
     </q-page-container>
-    <q-footer>
-      <q-banner inline-actions class="text-white bg-primary">
-        <logger-list/>
-        <template v-slot:action>
-          <q-btn flat color="white" label="Hide"></q-btn>
-        </template>
-      </q-banner>
-    </q-footer>
+    <c-footer/>
   </q-layout>
 </template>
+
 <script>
 import MenuTabs from '../components/shared/MenuTabs'
-import LoggerList from '../components/logger/LoggerList'
+import CFooter from '../components/shared/CFooter'
 
 export default {
   name: 'MainLayout',
-  components: { MenuTabs, LoggerList },
-  data () {
-    return {
-      text: ''
-    }
-  },
-  methods: {
-    handleTextClicked (text) {
-      this.text = text
-    }
-  },
-  computed: {
-    currentMessage: {
-      get () {
-        return this.$store.state.logger.currentMessage
-      }
-    }
-  }
+  components: { MenuTabs, CFooter }
 }
 </script>
