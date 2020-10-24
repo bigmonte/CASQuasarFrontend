@@ -33,6 +33,6 @@ export async function updateCommand (context, command) {
 
 export async function fetchSearchData (context) {
   const searchText = this.state.commands.searchText
-  const commands = await apiGetCall(`commands/search/${searchText}`)
+  const commands = await apiGetCall(`search/commands/${searchText}`)
   context.commit('updateSearchData', commands)
 }

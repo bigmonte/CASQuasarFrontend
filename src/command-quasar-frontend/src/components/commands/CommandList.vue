@@ -37,7 +37,6 @@ export default {
     async handleSearch (text) {
       if (this.canSearch) {
         this.$store.dispatch('commands/fetchSearchData')
-        this.searchingCommands = true
         this.selectedCommand = null
       }
     }

@@ -33,6 +33,6 @@ export async function updateSnippet (context, snippet) {
 
 export async function fetchSearchData (context) {
   const searchText = this.state.snippets.searchText
-  const snippets = await apiGetCall(`snippets/search/${searchText}`)
+  const snippets = await apiGetCall(`search/snippets/${searchText}`)
   context.commit('updateSearchData', snippets)
 }

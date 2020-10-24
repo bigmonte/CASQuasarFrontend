@@ -33,12 +33,36 @@ export default {
     },
     toggleView () {
       this.isDetailView = !this.isDetailView
+    },
+    async handleSearch (text) {
+      if (this.canSearch) {
+        this.$store.dispatch('snippets/fetchSearchData')
+      }
+    }
+  },
+  watch: {
+    searchText: function (text) {
+      this.handleSearch(text)
     }
   },
   computed: {
+    canSearch: {
+      get () {
+        return this.$store.getters['snippets/canSearch']
+      }
+    },
     snippets: {
       get () {
+        if (this.canSearch) return this.$store.state.snippets.searchData
         return this.$store.state.snippets.snippetsData
+      },
+      set (val) {
+        if (!this.canSearch) this.$store.commit('snippets/updateSnippets', val)
+      }
+    },
+    searchText: {
+      get () {
+        return this.$store.state.snippets.searchText
       }
     }
   }
