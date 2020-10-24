@@ -17,7 +17,7 @@ export default {
     async onFormSubmit (snippet) {
       try {
         await this.$store.dispatch('snippets/updateSnippet', snippet)
-        this.$store.dispatch('logger/addMessage', `Snippet Edited: id- ${snippet.id}`, false)
+        this.$store.dispatch('logger/addMessage', `Snippet Edited: ${snippet.id}`, false)
       } catch (error) {
         this.$store.dispatch('logger/addMessage', error, true)
       }

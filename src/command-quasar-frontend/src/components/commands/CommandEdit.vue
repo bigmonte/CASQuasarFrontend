@@ -1,5 +1,6 @@
 <script>
 import CommandForm from './CommandForm'
+
 export default {
   props: {
     command: {
@@ -16,7 +17,7 @@ export default {
   methods: {
     async onFormSubmit (command) {
       try {
-        if (JSON.stringify(command) === JSON.stringify(this.command)) { // TODO make it simpler
+        if (this.command.isEqual(command)) { // TODO make it simpler
           this.$store.dispatch('logger/addMessage', 'No changes detected!', true)
           return
         }

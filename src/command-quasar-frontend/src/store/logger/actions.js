@@ -1,7 +1,6 @@
+import { LogMessage } from '../../models'
 
 export function addMessage (context, message, isError) {
-  const sampleLog = { message: message, isError: isError }
-  const rId = Math.random().toString(36).substr(2, 7)
-  sampleLog.id = rId
+  const sampleLog = new LogMessage(message, isError)
   context.commit('addMessage', sampleLog)
 }

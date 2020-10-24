@@ -1,7 +1,9 @@
 // Commands state
+import { Command } from '../../models'
 
 export const updateCommands = (state, toSet) => {
-  state.commandsData = toSet
+  state.commandsData = []
+  toSet.forEach(d => state.commandsData.push(new Command(d.howTo, d.platform, d.commandLine, d.id)))
 }
 
 export const removeFromIndex = (state, index) => {
@@ -9,12 +11,13 @@ export const removeFromIndex = (state, index) => {
 }
 
 export const addCommand = (state, commandToSet) => {
-  state.commandsData.push(commandToSet)
+  const command = new Command(commandToSet.howTo, commandToSet.platform, commandToSet.commandLine, commandToSet.id)
+  state.commandsData.push(command)
 }
 
 export const replaceCommandAtIndex = (state, commandToReplace) => {
   const index = state.commandsData.findIndex(r => r.id === commandToReplace.id)
-  state.commandsData[index] = commandToReplace
+  state.commandsData[index] = new Command(commandToReplace.howTo, commandToReplace.platform, commandToReplace.commandLine, commandToReplace.id)
 }
 
 // Search commands state
