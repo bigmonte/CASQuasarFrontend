@@ -14,7 +14,7 @@
     </q-page-container>
     <q-footer>
       <q-banner inline-actions class="text-white bg-primary">
-        {{currentMessage}}
+        <logger-list/>
         <template v-slot:action>
           <q-btn flat color="white" label="Hide"></q-btn>
         </template>
@@ -24,10 +24,11 @@
 </template>
 <script>
 import MenuTabs from '../components/shared/MenuTabs'
+import LoggerList from '../components/logger/LoggerList'
 
 export default {
   name: 'MainLayout',
-  components: { MenuTabs },
+  components: { MenuTabs, LoggerList },
   data () {
     return {
       text: ''

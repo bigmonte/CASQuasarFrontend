@@ -1,5 +1,6 @@
 export default function () {
   return {
-    currentMessage: 'Commands and Snippets - 2020'
+    currentMessage: 'Commands and Snippets - 2020',
+    messages: []
   }
 }

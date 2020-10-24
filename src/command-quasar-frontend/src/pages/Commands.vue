@@ -20,15 +20,28 @@ export default {
     }
   },
   async created () {
-    this.$store.dispatch('commands/fetchCommands')
+    try {
+      this.$store.dispatch('commands/fetchCommands')
+      this.addLoggerMessage('Fetching commands from API', false)
+    } catch (error) {
+      this.addLoggerMessage(error, true)
+    }
   },
   methods: {
     async handleSearch (text) {
       if (this.canSearch) {
-        this.$store.dispatch('commands/fetchSearchData')
-        this.searchingCommands = true
-        this.selectedCommand = null
+        try {
+          this.$store.dispatch('commands/fetchSearchData')
+          this.selectedCommand = null
+          this.addLoggerMessage(`Search request: ${text}`, false)
+        } catch (error) {
+          this.addLoggerMessage(error, true)
+        }
       }
+    },
+    addLoggerMessage (message, isError) {
+      const sampleLog = { message: message, isError: isError }
+      this.$store.commit('logger/addMessage', sampleLog)
     }
   },
   computed: {
