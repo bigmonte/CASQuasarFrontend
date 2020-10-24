@@ -9,6 +9,12 @@ Frontend for the Commands and Snippets API, spawned with Quasar CLI.
 npm install
 ```
 
+## Start the app in development mode using PWA mode
+
+```bash
+quasar dev -m pwa
+```
+
 ### Start the app in development mode (hot-code reloading, error reporting, etc.)
 ```bash
 quasar dev
