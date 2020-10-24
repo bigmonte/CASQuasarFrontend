@@ -1,5 +1,5 @@
 import { apiGetCall, apiDeleteCall, apiPostCall, apiPutCall } from '../shared'
-
+import { LogMessage } from '../../models'
 // Commands API
 
 // Fetch commands data
@@ -7,10 +7,10 @@ export async function fetchCommands (context) {
   await apiGetCall('commands')
     .then((commands) => {
       context.commit('updateCommands', commands)
-      this.dispatch('logger/addMessage', { message: 'Commands fetched from server', isError: false })
+      this.dispatch('logger/addMessage', new LogMessage('Commands fetched from server', false))
     })
     .catch((error) => {
-      this.dispatch('logger/addMessage', { message: `fetch commands: ${error.message}`, isError: true })
+      this.dispatch('logger/addMessage', new LogMessage(`fetch commands: ${error.message}`, true))
     })
 }
 
@@ -20,10 +20,10 @@ export async function removeCommand (context, command) {
     .then((cmd) => {
       const index = this.state.commands.commandsData.findIndex(r => r.id === cmd.id)
       context.commit('removeFromIndex', index)
-      this.dispatch('logger/addMessage', { message: 'Command removed', isError: false })
+      this.dispatch('logger/addMessage', new LogMessage('Command removed', false))
     })
     .catch((error) => {
-      this.dispatch('logger/addMessage', { message: `remove commands ${error}`, isError: true })
+      this.dispatch('logger/addMessage', new LogMessage(`remove commands ${error}`, true))
     })
 }
 
@@ -31,10 +31,10 @@ export async function removeCommand (context, command) {
 export async function createCommand (context, command) {
   await apiPostCall('commands', command)
     .then(() => {
-      this.dispatch('logger/addMessage', { message: 'Command created', isError: false })
+      this.dispatch('logger/addMessage', new LogMessage('Command created', false))
     })
     .catch((error) => {
-      this.dispatch('logger/addMessage', { message: `Create command: ${error.message}`, isError: true })
+      this.dispatch('logger/addMessage', new LogMessage(`Create command: ${error.message}`, true))
     })
 }
 
@@ -46,7 +46,7 @@ export async function updateCommand (context, command) {
       context.commit('replaceCommandAtIndex', updatedCommand)
     })
     .catch((error) => {
-      this.dispatch('logger/addMessage', { message: `Update command: ${error.message}`, isError: true })
+      this.dispatch('logger/addMessage', new LogMessage(`Update command: ${error.message}`, true))
     })
 }
 
@@ -56,9 +56,9 @@ export async function fetchSearchData (context) {
   await apiGetCall(`search/commands/${searchText}`)
     .then((results) => {
       context.commit('updateSearchData', results)
-      this.dispatch('logger/addMessage', 'Fetched command search data', false)
+      this.dispatch('logger/addMessage', new LogMessage('Fetched command search data', false))
     })
     .catch((error) => {
-      this.dispatch('logger/addMessage', { message: `Fetch search data: ${error.message}`, isError: true })
+      this.dispatch('logger/addMessage', new LogMessage(`Fetch search data: ${error.message}`, true))
     })
 }
