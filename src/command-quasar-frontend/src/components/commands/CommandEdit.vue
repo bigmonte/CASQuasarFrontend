@@ -17,7 +17,7 @@ export default {
   methods: {
     async onFormSubmit (command) {
       if (this.command.isEqual(command)) { // TODO make it simpler
-        this.$store.dispatch('logger/addMessage', 'No changes detected!', true)
+        this.$store.dispatch('logger/addMessage', { message: 'No changes detected!', isError: true })
         return
       }
       await this.$store.dispatch('commands/updateCommand', command)

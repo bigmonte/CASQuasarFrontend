@@ -2,66 +2,63 @@ import { apiGetCall, apiDeleteCall, apiPostCall, apiPutCall } from '../shared'
 
 // Commands API
 
-// Todo get rid of try catch block
-
 // Fetch commands data
 export async function fetchCommands (context) {
-  try {
-    const commands = await apiGetCall('commands')
-    console.log('[+] commands fetched')
-    context.commit('updateCommands', commands)
-    this.dispatch('logger/addMessage', 'Commands fetched from server', false)
-  } catch (error) {
-    this.dispatch('logger/addMessage', `fetch commands: ${error.message}`, true)
-  }
+  await apiGetCall('commands')
+    .then((commands) => {
+      context.commit('updateCommands', commands)
+      this.dispatch('logger/addMessage', { message: 'Commands fetched from server', isError: false })
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', { message: `fetch commands: ${error.message}`, isError: true })
+    })
 }
 
 // Remove command from API/DB
 export async function removeCommand (context, command) {
-  try {
-    const delCmd = await apiDeleteCall(`commands/${command.id}`)
-    const index = this.state.commands.commandsData.findIndex(r => r.id === delCmd.id)
-    context.commit('removeFromIndex', index)
-    this.dispatch('logger/addMessage', 'Command removed', false)
-  } catch (error) {
-    this.dispatch('logger/addMessage', `remove commands ${error.message}`, true)
-  }
+  await apiDeleteCall(`commands/${command.id}`)
+    .then((cmd) => {
+      const index = this.state.commands.commandsData.findIndex(r => r.id === cmd.id)
+      context.commit('removeFromIndex', index)
+      this.dispatch('logger/addMessage', { message: 'Command removed', isError: false })
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', { message: `remove commands ${error}`, isError: true })
+    })
 }
 
 // Create command
 export async function createCommand (context, command) {
-  try {
-    this.dispatch('logger/addMessage', 'Command created', false)
-    return await apiPostCall('commands', command)
-    // Todo add to array and avoid another call
-  } catch (error) {
-    this.dispatch('logger/addMessage', `Create command: ${error.message}`, true)
-  }
+  await apiPostCall('commands', command)
+    .then(() => {
+      this.dispatch('logger/addMessage', { message: 'Command created', isError: false })
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', { message: `Create command: ${error.message}`, isError: true })
+    })
 }
 
 // Update command
 export async function updateCommand (context, command) {
-  try {
-    const updatedCommand = await apiPutCall(`commands/${command.id}`, command)
-    if (updatedCommand) {
+  await apiPutCall(`commands/${command.id}`, command)
+    .then((updatedCommand) => {
+      this.dispatch('logger/addMessage', 'Command updated', false)
       context.commit('replaceCommandAtIndex', updatedCommand)
-    }
-    this.dispatch('logger/addMessage', 'Command updated', false)
-    return updatedCommand
-  } catch (error) {
-    this.dispatch('logger/addMessage', `Update command: ${error.message}`, true)
-  }
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', { message: `Update command: ${error.message}`, isError: true })
+    })
 }
 
 // Search API
-
 export async function fetchSearchData (context) {
-  try {
-    const searchText = this.state.commands.searchText
-    const commands = await apiGetCall(`search/commands/${searchText}`)
-    context.commit('updateSearchData', commands)
-    this.dispatch('logger/addMessage', 'Fetched command search data', false)
-  } catch (error) {
-    this.dispatch('logger/addMessage', `Fetch search data: ${error.message}`, true)
-  }
+  const searchText = this.state.commands.searchText
+  await apiGetCall(`search/commands/${searchText}`)
+    .then((results) => {
+      context.commit('updateSearchData', results)
+      this.dispatch('logger/addMessage', 'Fetched command search data', false)
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', { message: `Fetch search data: ${error.message}`, isError: true })
+    })
 }
