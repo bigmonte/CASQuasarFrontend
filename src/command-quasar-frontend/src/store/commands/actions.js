@@ -2,9 +2,13 @@ import { apiGetCall, apiDeleteCall, apiPostCall, apiPutCall } from '../shared'
 
 // Commands API
 
+// can fetch commands
+// temporary workaround to "economize API calls"
+
 // Fetch commands data
 export async function fetchCommands (context) {
   const commands = await apiGetCall('commands')
+  console.log('[+] commands fetched')
   context.commit('updateCommands', commands)
 }
 

@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import commands from './commands'
 import snippets from './snippets'
+import logger from './logger'
 
 // import example from './module-example'
 
@@ -20,7 +21,8 @@ export default function (/* { ssrContext } */) {
   const Store = new Vuex.Store({
     modules: {
       commands,
-      snippets
+      snippets,
+      logger
     },
 
     // enable strict mode (adds overhead!)
@@ -32,7 +34,14 @@ export default function (/* { ssrContext } */) {
     module.hot.accept(['./commands'], () => {
       const newCommands = require('./commands').default
       const newSnippets = require('./snippets').default
-      Store.hotUpdate({ modules: { commands: newCommands, snippets: newSnippets } })
+      const newLogger = require('./logger').default
+      Store.hotUpdate({
+        modules: {
+          commands: newCommands,
+          snippets: newSnippets,
+          logger: newLogger
+        }
+      })
     })
   }
 

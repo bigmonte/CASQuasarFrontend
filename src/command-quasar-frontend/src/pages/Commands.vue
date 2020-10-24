@@ -1,5 +1,6 @@
 <template>
-  <command-list></command-list>
+  <command-list
+    :commands="commands"></command-list>
 </template>
 
 <script>

@@ -1,5 +1,6 @@
 <template>
-  <snippet-list></snippet-list>
+  <snippet-list
+  :snippets="snippets"></snippet-list>
 </template>
 
 <script>

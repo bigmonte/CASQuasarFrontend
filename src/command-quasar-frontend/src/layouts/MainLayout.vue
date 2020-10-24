@@ -12,6 +12,14 @@
     <q-page-container>
       <router-view/>
     </q-page-container>
+    <q-footer>
+      <q-banner inline-actions class="text-white bg-primary">
+        {{currentMessage}}
+        <template v-slot:action>
+          <q-btn flat color="white" label="Hide"></q-btn>
+        </template>
+      </q-banner>
+    </q-footer>
   </q-layout>
 </template>
 <script>
@@ -28,6 +36,13 @@ export default {
   methods: {
     handleTextClicked (text) {
       this.text = text
+    }
+  },
+  computed: {
+    currentMessage: {
+      get () {
+        return this.$store.state.logger.currentMessage
+      }
     }
   }
 }
