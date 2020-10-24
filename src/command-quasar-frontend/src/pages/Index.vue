@@ -15,7 +15,7 @@
       <template v-for="command in commands">
         <slide-item
           :key="command.id"
-          :name="command.id"
+          :name="`${command.id}`"
           :title="command.howTo"
           :subtitle="command.platform"
           :content="command.commandLine"/>
@@ -29,14 +29,14 @@ export default {
   components: { SlideItem },
   data () {
     return {
-      currentSlide: '0',
+      currentSlide: '',
       isDetailView: true,
       selectedCommand: null
     }
   },
   async created () {
     await this.$store.dispatch('commands/fetchCommands')
-    this.currentSlide = this.commands[0].id
+    this.currentSlide = `${this.commands[0].id}`
   },
   computed: {
     commands: {
