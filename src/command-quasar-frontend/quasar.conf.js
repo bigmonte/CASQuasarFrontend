@@ -128,9 +128,9 @@ module.exports = function (/* ctx */) {
       workboxPluginMode: 'GenerateSW', // 'GenerateSW' or 'InjectManifest'
       workboxOptions: {}, // only for GenerateSW
       manifest: {
-        name: 'CommandQuasarFrontend',
-        short_name: 'CommandQuasarFrontend',
-        description: 'Frontend for ASP.NET API Core 3.1',
+        name: 'Commands and Snippets Fronted',
+        short_name: 'CASFrontend',
+        description: 'Frontend for your useful commands and snippets',
         display: 'standalone',
         orientation: 'portrait',
         background_color: '#ffffff',
