@@ -10,8 +10,7 @@ export default {
   components: { SnippetList },
   data () {
     return {
-      isDetailView: true,
-      selectedSnippet: null
+      isDetailView: true
     }
   },
   watch: {
@@ -20,14 +19,22 @@ export default {
     }
   },
   async created () {
+    try {
+      this.$store.dispatch('logger/addMessage', 'Fetching snippets from API', false)
+    } catch (error) {
+      this.$store.dispatch('logger/addMessage', error, true)
+    }
     this.$store.dispatch('snippets/fetchSnippets')
   },
   methods: {
     async handleSearch (text) {
       if (this.canSearch) {
-        this.$store.dispatch('snippets/fetchSearchData')
-        this.searchingSnippets = true
-        this.selectedSnippet = null
+        try {
+          this.$store.dispatch('snippets/fetchSearchData')
+          this.$store.dispatch('logger/addMessage', `'Snippets search request ${text}'`, false)
+        } catch (error) {
+          this.$store.dispatch('logger/addMessage', error, true)
+        }
       }
     }
   },

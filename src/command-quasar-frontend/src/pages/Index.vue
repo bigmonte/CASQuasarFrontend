@@ -30,8 +30,7 @@ export default {
   data () {
     return {
       currentSlide: '',
-      isDetailView: true,
-      selectedCommand: null
+      isDetailView: true
     }
   },
   async created () {

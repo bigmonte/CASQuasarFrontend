@@ -15,7 +15,16 @@ export default {
   },
   methods: {
     async onFormSubmit (command) {
-      await this.$store.dispatch('commands/updateCommand', command)
+      try {
+        if (JSON.stringify(command) === JSON.stringify(this.command)) { // TODO make it simpler
+          this.$store.dispatch('logger/addMessage', 'No changes detected!', true)
+          return
+        }
+        await this.$store.dispatch('commands/updateCommand', command)
+        this.$store.dispatch('logger/addMessage', `Command Edited: id-${command.id}`, false)
+      } catch (error) {
+        this.$store.dispatch('logger/addMessage', error, true)
+      }
     },
     onBackClicked () {
       this.$emit('on-back-clicked')

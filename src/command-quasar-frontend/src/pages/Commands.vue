@@ -10,8 +10,7 @@ export default {
   components: { CommandList },
   data () {
     return {
-      isDetailView: true,
-      selectedCommand: null
+      isDetailView: true
     }
   },
   watch: {
@@ -22,9 +21,9 @@ export default {
   async created () {
     try {
       this.$store.dispatch('commands/fetchCommands')
-      this.addLoggerMessage('Fetching commands from API', false)
+      this.$store.dispatch('logger/addMessage', 'Fetching commands from API', false)
     } catch (error) {
-      this.addLoggerMessage(error, true)
+      this.$store.dispatch('logger/addMessage', error, true)
     }
   },
   methods: {
@@ -32,16 +31,11 @@ export default {
       if (this.canSearch) {
         try {
           this.$store.dispatch('commands/fetchSearchData')
-          this.selectedCommand = null
-          this.addLoggerMessage(`Search request: ${text}`, false)
+          this.$store.dispatch('logger/addMessage', `Search request: ${text}`, false)
         } catch (error) {
-          this.addLoggerMessage(error, true)
+          this.$store.dispatch('logger/addMessage', error, true)
         }
       }
-    },
-    addLoggerMessage (message, isError) {
-      const sampleLog = { message: message, isError: isError }
-      this.$store.commit('logger/addMessage', sampleLog)
     }
   },
   computed: {

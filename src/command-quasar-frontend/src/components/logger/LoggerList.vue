@@ -12,9 +12,6 @@ export default {
 }
 </script>
 
-// message = String
-// isError = true/false
-
 <template>
 <q-scroll-area style="height: 80px; max-width: 100%;">
   <q-list bordered v-for="message in messages" :key="message.id" >
