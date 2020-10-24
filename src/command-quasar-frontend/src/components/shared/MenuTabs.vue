@@ -33,7 +33,7 @@ export default {
 <template>
   <q-tabs shrink>
     <search
-      v-if="canShowSearch"/>
+      v-if="canShowSearchOrAdd"/>
     <router-link
       v-if="canShowSearchOrAdd"
       :to="{ name: `${getAddRoute()}` }" class="q-btn flat round dense">
