@@ -1,6 +1,7 @@
 <template>
+<div>
   <q-carousel
-        v-if="canShowSlider"
+        v-if="hasCommands"
         v-model="currentSlide"
         transition-prev="scale"
         transition-next="scale"
@@ -24,13 +25,37 @@
       </q-carousel>
       <div
         class="text-h6 text-white text-center q-pa-xl"
-        v-else>No content to show</div>
+        v-if="!hasCommands && !hasSnippets">No content to show</div>
+  <div class="q-pa-md">
+    <div class="row">
+      <div class="col q-pa-md"
+        v-if="hasCommands">
+        <div class="text-h6 text-primary text-center text-secondary q-pb-md"> CLI's </div>
+        <q-list dense bordered padding class="rounded-borders bg-primary"
+          v-for="command in commands" :key="command.id">
+          <platform-item
+            :platform="command.platform"/>
+        </q-list>
+      </div>
+      <div class="col q-pa-md"
+        v-if="hasSnippets">
+        <div class="text-h6 text-primary text-center text-secondary q-pb-md"> Platforms / Languages </div>
+        <q-list dense bordered padding class="rounded-borders bg-primary"
+          v-for="snippet in snippets" :key="snippet.id">
+          <platform-item
+            :platform="snippet.platform"/>
+        </q-list>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
-import SlideItem from '../components/SlideItem'
+import SlideItem from '../components/index/SlideItem'
+import PlatformItem from '../components/index/PlatformItem'
 export default {
-  components: { SlideItem },
+  components: { SlideItem, PlatformItem },
   data () {
     return {
       currentSlide: '',
@@ -39,7 +64,8 @@ export default {
   },
   async created () {
     await this.$store.dispatch('commands/fetchCommands')
-    if (this.commands && this.commands.length > 0) {
+    await this.$store.dispatch('snippets/fetchSnippets')
+    if (this.hasCommands) {
       this.currentSlide = `${this.commands[0].id}`
     }
   },
@@ -49,9 +75,19 @@ export default {
         return this.$store.state.commands.commandsData
       }
     },
-    canShowSlider: {
+    snippets: {
+      get () {
+        return this.$store.state.snippets.snippetsData
+      }
+    },
+    hasCommands: {
       get () {
         return this.commands.length > 0
+      }
+    },
+    hasSnippets: {
+      get () {
+        return this.snippets.length > 0
       }
     }
   }
