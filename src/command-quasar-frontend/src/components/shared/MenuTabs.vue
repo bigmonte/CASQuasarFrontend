@@ -4,26 +4,46 @@ export default {
   components: { Search },
   data () {
     return {
-      tab: 'commands',
-      currentRoute: 'commands' // default
+      currentRoute: 'commands'
     }
   },
   methods: {
     getAddRoute () {
       if ('name' in this.$route) {
-        if (this.$route.name === 'commands') this.currentRoute = this.$route.name
-        if (this.$route.name === 'snippets') this.currentRoute = this.$route.name
+        if (this.onCommandsRoute) this.currentRoute = this.$route.name
+        if (this.onSnippetsRoute) this.currentRoute = this.$route.name
         return `${this.currentRoute}New`
       }
     }
   },
   computed: {
-    canShowSearchOrAdd: {
+    onCommandsRoute: {
       get () {
         if ('name' in this.$route) {
-          return (this.$route.name === 'commands' || this.$route.name === 'snippets')
+          return this.$route.name === 'commands'
         }
         return false
+      }
+    },
+    onSnippetsRoute: {
+      get () {
+        if ('name' in this.$route) {
+          return this.$route.name === 'snippets'
+        }
+        return false
+      }
+    },
+    canShowSearch: {
+      get () {
+        if ('name' in this.$route) {
+          return (this.onCommandsRoute && this.$store.state.commands.commandsData.length > 0) || (this.onSnippetsRoute && this.$store.state.snippets.snippetsData.length > 0)
+        }
+        return false
+      }
+    },
+    canShowAddButton: {
+      get () {
+        return this.onSnippetsRoute || this.onCommandsRoute
       }
     }
   }
@@ -31,11 +51,12 @@ export default {
 </script>
 
 <template>
-  <q-tabs shrink>
+  <q-tabs
+    indicator-color="green">
     <search
-      v-if="canShowSearchOrAdd"/>
+      v-if="canShowSearch"/>
     <router-link
-      v-if="canShowSearchOrAdd"
+      v-if="canShowAddButton"
       :to="{ name: `${getAddRoute()}` }" class="q-btn flat round dense">
       <q-icon name="add" color="white"></q-icon>
     </router-link>

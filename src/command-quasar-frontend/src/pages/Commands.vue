@@ -1,6 +1,12 @@
 <template>
   <command-list
-    :commands="commands"></command-list>
+    v-if="this.commands.length > 0"
+    :commands="commands">
+  </command-list>
+  <div
+        class="text-h6 text-white text-center q-pa-xl"
+        v-else>No commands to show
+  </div>
 </template>
 
 <script>

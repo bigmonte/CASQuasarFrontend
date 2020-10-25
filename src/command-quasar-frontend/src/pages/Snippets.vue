@@ -1,6 +1,12 @@
 <template>
   <snippet-list
-  :snippets="snippets"></snippet-list>
+    v-if="this.snippets.length > 0"
+    :snippets="snippets">
+  </snippet-list>
+  <div
+        class="text-h6 text-white text-center q-pa-xl"
+        v-else>No snippets to show
+  </div>
 </template>
 
 <script>

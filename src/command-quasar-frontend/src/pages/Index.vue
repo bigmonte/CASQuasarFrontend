@@ -1,5 +1,6 @@
 <template>
   <q-carousel
+        v-if="canShowSlider"
         v-model="currentSlide"
         transition-prev="scale"
         transition-next="scale"
@@ -12,15 +13,18 @@
         height="300px"
         class="bg-primary text-white shadow-1 rounded-borders"
       >
-      <template v-for="command in commands">
-        <slide-item
-          :key="command.id"
-          :name="`${command.id}`"
-          :title="command.howTo"
-          :subtitle="command.platform"
-          :content="command.commandLine"/>
-      </template>
+        <template v-for="command in commands">
+          <slide-item
+            :key="command.id"
+            :name="`${command.id}`"
+            :title="command.howTo"
+            :subtitle="command.platform"
+            :content="command.commandLine"/>
+        </template>
       </q-carousel>
+      <div
+        class="text-h6 text-white text-center q-pa-xl"
+        v-else>No content to show</div>
 </template>
 
 <script>
@@ -43,6 +47,11 @@ export default {
     commands: {
       get () {
         return this.$store.state.commands.commandsData
+      }
+    },
+    canShowSlider: {
+      get () {
+        return this.commands.length > 0
       }
     }
   }
