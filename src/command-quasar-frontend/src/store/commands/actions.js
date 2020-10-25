@@ -7,6 +7,7 @@ export async function fetchCommands (context) {
   await apiGetCall('commands')
     .then((commands) => {
       context.commit('updateCommands', commands)
+      console.log(context)
       this.dispatch('logger/addMessage', new LogMessage('Commands fetched from server', false))
     })
     .catch((error) => {

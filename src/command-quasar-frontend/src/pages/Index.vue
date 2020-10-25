@@ -35,7 +35,9 @@ export default {
   },
   async created () {
     await this.$store.dispatch('commands/fetchCommands')
-    this.currentSlide = `${this.commands[0].id}`
+    if (this.commands && this.commands.length > 0) {
+      this.currentSlide = `${this.commands[0].id}`
+    }
   },
   computed: {
     commands: {
