@@ -3,7 +3,7 @@ import LoggerList from '../logger/LoggerList'
 export default {
   data () {
     return {
-      showLogger: true
+      showLogger: false
     }
   },
   name: 'CFooter',

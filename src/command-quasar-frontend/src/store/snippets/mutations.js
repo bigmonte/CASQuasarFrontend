@@ -1,7 +1,8 @@
-// Snippets state
+import { Snippet } from '../../models'
 
 export const updateSnippets = (state, toSet) => {
-  state.snippetsData = toSet
+  state.snippetsData = []
+  toSet.forEach(d => state.snippetsData.push(new Snippet(d.howTo, d.platform, d.codeSnippet, d.id)))
 }
 
 export const removeFromIndex = (state, index) => {
@@ -9,12 +10,13 @@ export const removeFromIndex = (state, index) => {
 }
 
 export const addSnippet = (state, snippetToSet) => {
-  state.snippetsData.push(snippetToSet)
+  const snippet = new Snippet(snippetToSet.howTo, snippetToSet.platform, snippetToSet.codeSnippet, snippetToSet.id)
+  state.snippetsData.push(snippet)
 }
 
 export const replaceSnippetAtIndex = (state, snippetToReplace) => {
   const index = state.snippetsData.findIndex(r => r.id === snippetToReplace.id)
-  state.snippetsData[index] = snippetToReplace
+  state.snippetsData[index] = new Snippet(snippetToReplace.howTo, snippetToReplace.platform, snippetToReplace.codeSnippet, snippetToReplace.id)
 }
 
 // Search snippets state

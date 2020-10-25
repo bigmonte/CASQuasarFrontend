@@ -1,38 +1,67 @@
 import { apiGetCall, apiDeleteCall, apiPostCall, apiPutCall } from '../shared'
-
+import { LogMessage } from '../../models'
 // Snippets API
 
 // Fetch snippets data
 export async function fetchSnippets (context) {
-  const snippets = await apiGetCall('snippets')
-  context.commit('updateSnippets', snippets)
+  await apiGetCall('snippets')
+    .then((snippets) => {
+      context.commit('updateSnippets', snippets)
+      this.dispatch('logger/addMessage', new LogMessage('Snippets fetched from server', false))
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', new LogMessage(`Fetch Snippets: ${error.message}`, true))
+    })
 }
 
 // Remove snippet from API/DB
 export async function removeSnippet (context, snippet) {
-  const delCmd = await apiDeleteCall(`snippets/${snippet.id}`)
-  const index = this.state.snippets.snippetsData.findIndex(r => r.id === delCmd.id)
-  context.commit('removeFromIndex', index)
+  await apiDeleteCall(`snippets/${snippet.id}`)
+    .then((snp) => {
+      const index = this.state.snippets.snippetsData.findIndex(r => r.id === snp.id)
+      context.commit('removeFromIndex', index)
+      this.dispatch('logger/addMessage', new LogMessage('Snippet removed from server', false))
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', new LogMessage(`Remove snippet: ${error.message}`, true))
+    })
 }
 
 // Create snippet
 export async function createSnippet (context, snippet) {
-  return await apiPostCall('snippets', snippet)
+  await apiPostCall('snippets', snippet)
+    .then((snippet) => {
+      this.dispatch('logger/addMessage', new LogMessage('Created Snippet', false))
+      return snippet
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', new LogMessage(`Create snippet: ${error.message}`, true))
+    })
 }
 
 // Update snippet
 export async function updateSnippet (context, snippet) {
-  const updatedSnippet = await apiPutCall(`snippets/${snippet.id}`, snippet)
-  if (updatedSnippet) {
-    context.commit('replaceSnippetAtIndex', updatedSnippet)
-  }
-  return updatedSnippet
+  await apiPutCall(`snippets/${snippet.id}`, snippet)
+    .then((updatedSnippet) => {
+      context.commit('replaceSnippetAtIndex', updatedSnippet)
+      this.dispatch('logger/addMessage', new LogMessage('Updated Snippet', false))
+      return updatedSnippet
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', new LogMessage(`Updating snippet: ${error.message}`, true))
+    })
 }
 
 // Search API
 
 export async function fetchSearchData (context) {
   const searchText = this.state.snippets.searchText
-  const snippets = await apiGetCall(`search/snippets/${searchText}`)
-  context.commit('updateSearchData', snippets)
+  await apiGetCall(`search/snippets/${searchText}`)
+    .then((snippets) => {
+      context.commit('updateSearchData', snippets)
+      this.dispatch('logger/addMessage', new LogMessage(`Fetched snippet search data: ${searchText}`, false))
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', new LogMessage(`Error fetching search snippet data: ${error.message}`, true))
+    })
 }

@@ -7,7 +7,6 @@ export async function fetchCommands (context) {
   await apiGetCall('commands')
     .then((commands) => {
       context.commit('updateCommands', commands)
-      console.log(context)
       this.dispatch('logger/addMessage', new LogMessage('Commands fetched from server', false))
     })
     .catch((error) => {
@@ -31,8 +30,9 @@ export async function removeCommand (context, command) {
 // Create command
 export async function createCommand (context, command) {
   await apiPostCall('commands', command)
-    .then(() => {
+    .then((cmd) => {
       this.dispatch('logger/addMessage', new LogMessage('Command created', false))
+      return cmd
     })
     .catch((error) => {
       this.dispatch('logger/addMessage', new LogMessage(`Create command: ${error.message}`, true))

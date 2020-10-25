@@ -16,10 +16,10 @@ export class Command {
 }
 
 export class Snippet {
-  constructor (howTo, platform, snippetCode, id) {
+  constructor (howTo, platform, codeSnippet, id) {
     this.howTo = howTo
     this.platform = platform
-    this.snippetCode = snippetCode
+    this.codeSnippet = codeSnippet
     this.id = id
   }
 }

@@ -16,6 +16,7 @@ export default {
       this.$emit('on-edit-clicked', this.snippet)
     },
     async deleteSnippet () {
+      console.log(this.uSnippet.id)
       this.$store.dispatch('snippets/removeSnippet', this.uSnippet)
     }
   }

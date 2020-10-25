@@ -15,6 +15,10 @@ export default {
   },
   methods: {
     async onFormSubmit (snippet) {
+      if (this.snippet.isEqual(snippet)) { // TODO make it simpler
+        this.$store.dispatch('logger/addMessage', { message: 'No changes detected when editing Snippet!', isError: true })
+        return
+      }
       await this.$store.dispatch('snippets/updateSnippet', snippet)
     },
     onBackClicked () {
