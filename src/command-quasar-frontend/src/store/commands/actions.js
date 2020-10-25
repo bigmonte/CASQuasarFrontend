@@ -14,6 +14,25 @@ export async function fetchCommands (context) {
     })
 }
 
+// Fetch commands with platform
+
+export async function fetchCommandsWithPlatform (context, platform) {
+  /* await apiGetCall(`commands/platform/${platform}`)
+    .then((commands) => {
+      context.commit('updateCommandsToShwo', commands)
+      this.dispatch('logger/addMessage', new LogMessage('Commands fetched from server', false))
+    })
+    .catch((error) => {
+      this.dispatch('logger/addMessage', new LogMessage(`fetch commands: ${error.message}`, true))
+    }) */
+  const filteredCommands = []
+  for (var i = 0; i < this.state.commands.commandsData.length; i++) {
+    var cmd = this.state.commands.commandsData[i]
+    if (cmd.platform === platform) filteredCommands.push(cmd)
+  }
+  context.commit('updateCommandsToShow', filteredCommands)
+}
+
 // Remove command from API/DB
 export async function removeCommand (context, command) {
   await apiDeleteCall(`commands/${command.id}`)

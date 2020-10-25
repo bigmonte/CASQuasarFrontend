@@ -1,9 +1,14 @@
 // Commands state
 import { Command } from '../../models'
 
-export const updateCommands = (state, toSet) => {
+export const updateCommands = (state, commandsList) => {
   state.commandsData = []
-  toSet.forEach(d => state.commandsData.push(new Command(d.howTo, d.platform, d.commandLine, d.id)))
+  commandsList.forEach(d => state.commandsData.push(new Command(d.howTo, d.platform, d.commandLine, d.id)))
+}
+
+export const updateCommandsToShow = (state, commandsList) => {
+  state.commandsToShow = []
+  commandsList.forEach(d => state.commandsToShow.push(new Command(d.howTo, d.platform, d.commandLine, d.id)))
 }
 
 export const removeFromIndex = (state, index) => {

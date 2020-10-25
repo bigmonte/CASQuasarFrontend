@@ -32,18 +32,18 @@
         v-if="hasCommands">
         <div class="text-h6 text-primary text-center text-secondary q-pb-md"> CLI's </div>
         <q-list dense bordered padding class="rounded-borders bg-primary"
-          v-for="command in commands" :key="command.id">
+          v-for="platform in getCommandsPlatform" :key="platform">
           <platform-item
-            :platform="command.platform"/>
+            :platform="platform"/>
         </q-list>
       </div>
       <div class="col q-pa-md"
         v-if="hasSnippets">
         <div class="text-h6 text-primary text-center text-secondary q-pb-md"> Platforms / Languages </div>
         <q-list dense bordered padding class="rounded-borders bg-primary"
-          v-for="snippet in snippets" :key="snippet.id">
+          v-for="platform in getSnippetsPlatform" :key="platform">
           <platform-item
-            :platform="snippet.platform"/>
+            :platform="platform"/>
         </q-list>
       </div>
     </div>
@@ -89,6 +89,26 @@ export default {
       get () {
         return this.snippets.length > 0
       }
+    },
+    getCommandsPlatform () {
+      const platforms = []
+      for (var i = 0; i < this.commands.length; i++) {
+        const cmd = this.commands[i]
+        if (!platforms.includes(cmd.platform)) {
+          platforms.push(cmd.platform)
+        }
+      }
+      return platforms
+    },
+    getSnippetsPlatform () {
+      const platforms = []
+      for (var i = 0; i < this.snippets.length; i++) {
+        const snp = this.snippets[i]
+        if (!platforms.includes(snp.platform)) {
+          platforms.push(snp.platform)
+        }
+      }
+      return platforms
     }
   }
 }

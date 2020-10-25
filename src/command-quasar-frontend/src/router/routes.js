@@ -12,7 +12,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'commands', component: () => import('pages/Commands.vue') },
-      { path: 'new', name: 'commandsNew', component: () => import('pages/CommandNew.vue') }
+      { path: 'new', name: 'commandsNew', component: () => import('pages/CommandNew.vue') },
+      { path: 'platform/:platform', name: 'commandsPlatform', component: () => import('pages/CommandsPlatform.vue') }
     ]
   },
   {
