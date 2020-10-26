@@ -62,7 +62,7 @@ export async function createCommand (context, command) {
 export async function updateCommand (context, command) {
   await apiPutCall(`commands/${command.id}`, command)
     .then((updatedCommand) => {
-      this.dispatch('logger/addMessage', 'Command updated', false)
+      this.dispatch('logger/addMessage', new LogMessage('Updated command', false))
       context.commit('replaceCommandAtIndex', updatedCommand)
     })
     .catch((error) => {
