@@ -1,5 +1,6 @@
 <script>
 import CommandForm from '../components/commands/CommandForm'
+import notify from '../components/notify'
 
 export default {
   components: { CommandForm },
@@ -8,6 +9,7 @@ export default {
       get () { return this.$store.getters['commands/getCommandWithId'](this.$route.params.id) }
     }
   },
+  mixins: [notify],
   data () {
     return {
       formTitle: 'Edit Command'
@@ -20,11 +22,9 @@ export default {
   },
   methods: {
     async onFormSubmit (command) {
-      if (this.command.isEqual(command)) {
-        this.$store.dispatch('logger/addMessage', { message: 'No changes detected when editing Command!!', isError: true })
-        return
-      }
       await this.$store.dispatch('commands/updateCommand', command)
+        .then(() => this.showNotif('Command Updated!'))
+        .catch((error) => this.showNotif(error))
     }
   }
 }

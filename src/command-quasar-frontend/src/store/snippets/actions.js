@@ -41,6 +41,10 @@ export async function createSnippet (context, snippet) {
 
 // Update snippet
 export async function updateSnippet (context, snippet) {
+  const id = snippet.id
+  if ((context.getters.getSnippetWithId(id)).isEqual(snippet)) {
+    return Promise.reject('The snippet had no changes!')
+  }
   await apiPutCall(`snippets/${snippet.id}`, snippet)
     .then((updatedSnippet) => {
       context.commit('replaceSnippetAtIndex', updatedSnippet)

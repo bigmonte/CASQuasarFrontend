@@ -1,5 +1,6 @@
 <script>
 import SnippetForm from '../components/snippets/SnippetForm'
+import notify from '../components/notify'
 export default {
   components: { SnippetForm },
   data () {
@@ -7,6 +8,7 @@ export default {
       formTitle: 'Edit Snippet'
     }
   },
+  mixins: [notify],
   beforeMount () { // Todo use beforeEnterRoute?
     if (this.snippet === null) {
       this.$router.push('/404')
@@ -14,11 +16,9 @@ export default {
   },
   methods: {
     async onFormSubmit (snippet) {
-      if (this.snippet.isEqual(snippet)) { // TODO make it simpler
-        this.$store.dispatch('logger/addMessage', { message: 'No changes detected when editing Snippet!', isError: true })
-        return
-      }
       await this.$store.dispatch('snippets/updateSnippet', snippet)
+        .then(() => this.showNotif('Updated snippet!'))
+        .catch(error => this.showNotif(error))
     }
   },
   computed: {

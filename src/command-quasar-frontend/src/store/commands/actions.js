@@ -41,6 +41,10 @@ export async function createCommand (context, command) {
 
 // Update command
 export async function updateCommand (context, command) {
+  const id = command.id
+  if ((context.getters.getCommandWithId(id)).isEqual(command)) {
+    return Promise.reject('The command had no changes!')
+  }
   await apiPutCall(`commands/${command.id}`, command)
     .then((updatedCommand) => {
       this.dispatch('logger/addMessage', new LogMessage('Updated command', false))
