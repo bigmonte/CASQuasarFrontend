@@ -31,6 +31,7 @@ const routes = [
   // but you can also remove it
   {
     path: '*',
+    name: 'notFound',
     component: () => import('pages/Error404.vue')
   }
 ]

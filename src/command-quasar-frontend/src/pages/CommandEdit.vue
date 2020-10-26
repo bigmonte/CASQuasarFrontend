@@ -8,6 +8,11 @@ export default {
       formTitle: 'Edit Command'
     }
   },
+  beforeMount () { // Todo use beforeEnterRoute?
+    if (this.command === null) {
+      this.$router.push('/404')
+    }
+  },
   methods: {
     async onFormSubmit (command) {
       if (this.command.isEqual(command)) { // TODO make it simpler

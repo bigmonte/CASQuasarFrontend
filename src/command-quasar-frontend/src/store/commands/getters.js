@@ -17,5 +17,5 @@ export const commandsWithPlatform = (state) => (platform) => {
 
 export const getCommandWithId = (state) => (id) => {
   var result = state.commandsData.filter(c => c.id === id)
-  return result.length > 0 ? result[0] : { }
+  return result.length > 0 ? result[0] : null
 }

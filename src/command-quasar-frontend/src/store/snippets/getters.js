@@ -8,5 +8,5 @@ export const snippetsWithPlatform = (state) => (platform) => {
 
 export const getSnippetWithId = (state) => (id) => {
   var result = state.snippetsData.filter(c => c.id === id)
-  return result.length > 0 ? result[0] : { }
+  return result.length > 0 ? result[0] : null
 }

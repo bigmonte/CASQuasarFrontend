@@ -7,6 +7,11 @@ export default {
       formTitle: 'Edit Snippet'
     }
   },
+  beforeMount () { // Todo use beforeEnterRoute?
+    if (this.snippet === null) {
+      this.$router.push('/404')
+    }
+  },
   methods: {
     async onFormSubmit (snippet) {
       if (this.snippet.isEqual(snippet)) { // TODO make it simpler
