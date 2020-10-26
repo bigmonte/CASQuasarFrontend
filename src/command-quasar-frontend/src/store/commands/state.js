@@ -3,7 +3,6 @@ export default function () {
     //
     searchText: '',
     searchData: [],
-    commandsData: [],
-    commandsToShow: []
+    commandsData: []
   }
 }

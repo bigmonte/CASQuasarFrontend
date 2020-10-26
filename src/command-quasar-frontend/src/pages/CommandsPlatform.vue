@@ -29,9 +29,6 @@ export default {
       this.handleSearch(text)
     }
   },
-  async created () {
-    this.$store.dispatch('commands/fetchCommandsWithPlatform', this.$route.params.platform)
-  },
   methods: {
     async handleSearch (text) {
       if (this.canSearch) {
@@ -47,7 +44,7 @@ export default {
     },
     commands: {
       get () {
-        return this.$store.state.commands.commandsToShow
+        return this.$store.getters['commands/commandsWithPlatform'](this.$route.params.platform)
       }
     },
     searchText: {
