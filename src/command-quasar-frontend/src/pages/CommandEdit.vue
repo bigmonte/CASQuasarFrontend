@@ -1,12 +1,7 @@
 <script>
-import CommandForm from './CommandForm'
+import CommandForm from '../components/commands/CommandForm'
 
 export default {
-  props: {
-    command: {
-      type: Object
-    }
-  },
   components: { CommandForm },
   data () {
     return {
@@ -20,6 +15,13 @@ export default {
         return
       }
       await this.$store.dispatch('commands/updateCommand', command)
+    }
+  },
+  computed: {
+    command: {
+      get () {
+        return this.$store.getters['commands/getCommandWithId'](this.$route.params.id)
+      }
     }
   }
 }

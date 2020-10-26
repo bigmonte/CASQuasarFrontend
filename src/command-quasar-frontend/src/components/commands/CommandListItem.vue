@@ -10,10 +10,9 @@ export default {
       uCommand: { ...this.command }
     }
   },
-  emits: ['on-edit-clicked'],
   methods: {
     onEditButtonClicked (selectedCommand) {
-      this.$emit('on-edit-clicked', this.command)
+      this.$router.push({ name: 'commandEdit', params: { id: selectedCommand.id } })
     },
     async deleteCommand () {
       this.$store.dispatch('commands/removeCommand', this.uCommand)

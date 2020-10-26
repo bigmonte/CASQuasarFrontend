@@ -17,6 +17,5 @@ export default {
 <template>
   <command-form
     :formTitle="`${'Add command'}`"
-    @on-form-submit="submitCreateForm($event) "
-    @on-back-clicked="$router.go(-1)" />
+    @on-form-submit="submitCreateForm($event)"/>
 </template>

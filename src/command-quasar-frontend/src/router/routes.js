@@ -13,7 +13,8 @@ const routes = [
     children: [
       { path: '', name: 'commands', component: () => import('pages/Commands.vue') },
       { path: 'new', name: 'commandsNew', component: () => import('pages/CommandNew.vue') },
-      { path: 'platform/:platform', name: 'commandsPlatform', component: () => import('pages/CommandsPlatform.vue') }
+      { path: 'platform/:platform', name: 'commandsPlatform', component: () => import('pages/CommandsPlatform.vue') },
+      { path: 'edit/:id', name: 'commandEdit', component: () => import('pages/CommandEdit.vue') }
     ]
   },
   {
@@ -21,7 +22,8 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', name: 'snippets', component: () => import('pages/Snippets.vue') },
-      { path: 'new', name: 'snippetsNew', component: () => import('pages/SnippetNew.vue') }
+      { path: 'new', name: 'snippetsNew', component: () => import('pages/SnippetNew.vue') },
+      { path: 'edit/:id', name: 'snippetEdit', component: () => import('pages/SnippetEdit.vue') }
     ]
   },
 

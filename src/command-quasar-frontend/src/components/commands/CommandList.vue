@@ -1,22 +1,14 @@
 <template>
-    <div class="q-ma-sm"
-      v-if="isDetailView">
+    <div class="q-ma-sm">
         <div v-for="command in commands" :key="command.id" class="q-py-md">
           <command-list-item
-            :command='command'
-            @on-edit-clicked="onEditButtonClicked"/>
+            :command='command'/>
         </div>
   </div>
-  <command-edit
-    v-else
-    :command="selectedCommand"
-    @on-back-clicked="toggleView"/>
 </template>
 
 <script>
 import CommandListItem from './CommandListItem'
-import CommandEdit from './CommandEdit'
-
 export default {
   props: {
     commands: {
@@ -24,21 +16,7 @@ export default {
     }
   },
   name: 'CommandList',
-  components: { CommandListItem, CommandEdit },
-  data () {
-    return {
-      selectedCommand: null,
-      isDetailView: true
-    }
-  },
-  methods: {
-    onEditButtonClicked (command) {
-      this.selectedCommand = command
-      this.toggleView()
-    },
-    toggleView () {
-      this.isDetailView = !this.isDetailView
-    }
-  }
+  components: { CommandListItem }
 }
+
 </script>

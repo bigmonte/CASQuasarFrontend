@@ -14,11 +14,8 @@ export default {
       uCommand: { ...this.command }
     }
   },
-  emit: ['on-back-clicked', 'on-form-submit'],
+  emit: ['on-form-submit'],
   methods: {
-    onBackButton: function () {
-      this.$emit('on-back-clicked')
-    },
     onFormSubmit () {
       this.$emit('on-form-submit', this.uCommand)
     }
@@ -33,7 +30,7 @@ export default {
         color="primary"
         flat
         class="q-ml-sm"
-        @click="onBackButton"
+        @click="$router.go(-1)"
       >
         <q-icon name="arrow_back" color="white"></q-icon>
       </q-btn>

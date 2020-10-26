@@ -10,13 +10,11 @@ export default {
       uSnippet: { ...this.snippet }
     }
   },
-  emits: ['on-edit-clicked'],
   methods: {
     onEditButtonClicked (selectedSnippet) {
-      this.$emit('on-edit-clicked', this.snippet)
+      this.$router.push({ name: 'snippetEdit', params: { id: selectedSnippet.id } })
     },
     async deleteSnippet () {
-      console.log(this.uSnippet.id)
       this.$store.dispatch('snippets/removeSnippet', this.uSnippet)
     }
   }

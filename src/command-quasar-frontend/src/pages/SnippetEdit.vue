@@ -1,13 +1,7 @@
 <script>
-import SnippetForm from './SnippetForm'
+import SnippetForm from '../components/snippets/SnippetForm'
 export default {
-  props: {
-    snippet: {
-      type: Object
-    }
-  },
   components: { SnippetForm },
-  emits: ['on-back-clicked'],
   data () {
     return {
       formTitle: 'Edit Snippet'
@@ -20,18 +14,22 @@ export default {
         return
       }
       await this.$store.dispatch('snippets/updateSnippet', snippet)
-    },
-    onBackClicked () {
-      this.$emit('on-back-clicked')
+    }
+  },
+  computed: {
+    snippet: {
+      get () {
+        return this.$store.getters['snippets/getSnippetWithId'](this.$route.params.id)
+      }
     }
   }
 }
+
 </script>
 
 <template>
 <snippet-form
     :snippet="snippet"
     :formTitle="formTitle"
-    @on-form-submit="onFormSubmit($event)"
-    @on-back-clicked="onBackClicked"/>
+    @on-form-submit="onFormSubmit($event)"/>
 </template>
