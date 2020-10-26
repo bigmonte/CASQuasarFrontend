@@ -3,9 +3,6 @@ import SnippetForm from '../components/snippets/SnippetForm'
 
 export default {
   components: { SnippetForm },
-  beforeUnmount () {
-    this.clearAlertTimeout()
-  },
   methods: {
     async submitCreateForm (snippetToCreate) {
       this.$store.dispatch('snippets/createSnippet', snippetToCreate)

@@ -14,17 +14,6 @@ import SnippetList from '../components/snippets/SnippetList'
 
 export default {
   components: { SnippetList },
-  props: {
-    platform: {
-      type: String,
-      required: true
-    }
-  },
-  data () {
-    return {
-      isDetailView: true
-    }
-  },
   watch: {
     searchText: function (text) {
       this.handleSearch(text)
@@ -39,19 +28,13 @@ export default {
   },
   computed: {
     canSearch: {
-      get () {
-        return this.$store.getters['snippets/canSearch']
-      }
+      get () { return this.$store.getters['snippets/canSearch'] }
     },
     snippets: {
-      get () {
-        return this.$store.getters['snippets/snippetsWithPlatform'](this.$route.params.platform)
-      }
+      get () { return this.$store.getters['snippets/snippetsWithPlatform'](this.$route.params.platform) }
     },
     searchText: {
-      get () {
-        return this.$store.state.snippets.searchText
-      }
+      get () { return this.$store.state.snippets.searchText }
     }
   }
 }

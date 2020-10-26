@@ -1,24 +1,8 @@
-<template>
-  <command-list
-    v-if="this.commands.length > 0"
-    :commands="commands">
-  </command-list>
-  <div
-        class="text-h6 text-white text-center q-pa-xl"
-        v-else>No commands to show
-  </div>
-</template>
-
 <script>
 import CommandList from '../components/commands/CommandList'
 
 export default {
   components: { CommandList },
-  props: {
-    platform: {
-      type: String
-    }
-  },
   data () {
     return {
       isDetailView: true
@@ -55,3 +39,14 @@ export default {
   }
 }
 </script>
+
+<template>
+  <command-list
+    v-if="this.commands.length > 0"
+    :commands="commands">
+  </command-list>
+  <div
+        class="text-h6 text-white text-center q-pa-xl"
+        v-else>No commands to show
+  </div>
+</template>

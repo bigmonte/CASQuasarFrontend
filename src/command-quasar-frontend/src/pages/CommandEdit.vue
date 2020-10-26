@@ -3,6 +3,11 @@ import CommandForm from '../components/commands/CommandForm'
 
 export default {
   components: { CommandForm },
+  computed: {
+    command: {
+      get () { return this.$store.getters['commands/getCommandWithId'](this.$route.params.id) }
+    }
+  },
   data () {
     return {
       formTitle: 'Edit Command'
@@ -15,18 +20,11 @@ export default {
   },
   methods: {
     async onFormSubmit (command) {
-      if (this.command.isEqual(command)) { // TODO make it simpler
+      if (this.command.isEqual(command)) {
         this.$store.dispatch('logger/addMessage', { message: 'No changes detected when editing Command!!', isError: true })
         return
       }
       await this.$store.dispatch('commands/updateCommand', command)
-    }
-  },
-  computed: {
-    command: {
-      get () {
-        return this.$store.getters['commands/getCommandWithId'](this.$route.params.id)
-      }
     }
   }
 }

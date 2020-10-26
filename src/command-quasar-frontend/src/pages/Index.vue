@@ -1,3 +1,61 @@
+<script>
+import SlideItem from '../components/index/SlideItem'
+import PlatformItem from '../components/index/PlatformItem'
+export default {
+  components: { SlideItem, PlatformItem },
+  data () {
+    return {
+      currentCommandSlide: '',
+      currentSnippetSlide: ''
+    }
+  },
+  async created () {
+    await this.$store.dispatch('commands/fetchCommands')
+    await this.$store.dispatch('snippets/fetchSnippets')
+    if (this.hasCommands) {
+      this.currentCommandSlide = `${this.sliderCommands[0].id}`
+    }
+    if (this.hasSnippets) {
+      this.currentSnippetSlide = `${this.sliderSnippets[0].id}`
+    }
+  },
+  methods: {
+    filterByPlatform (arr) {
+      const platforms = []
+      for (var i = 0; i < arr.length; i++) {
+        const obj = arr[i]
+        if (!platforms.includes(obj.platform)) {
+          platforms.push(obj.platform)
+        }
+      }
+      return platforms
+    }
+  },
+  computed: {
+    commands: {
+      get () { return this.$store.state.commands.commandsData }
+    },
+    snippets: {
+      get () { return this.$store.state.snippets.snippetsData }
+    },
+    sliderCommands: {
+      get () { return this.$store.getters['commands/getLastCommands'](3) }
+    },
+    sliderSnippets: {
+      get () { return this.$store.getters['snippets/getLastSnippets'](3) }
+    },
+    hasCommands: {
+      get () { return this.commands.length > 0 }
+    },
+    hasSnippets: {
+      get () { return this.snippets.length > 0 }
+    },
+    getCommandsPlatform () { return this.filterByPlatform(this.commands) },
+    getSnippetsPlatform () { return this.filterByPlatform(this.snippets) }
+  }
+}
+</script>
+
 <template>
 <div>
   <q-carousel
@@ -52,78 +110,3 @@
   </div>
 </div>
 </template>
-
-<script>
-import SlideItem from '../components/index/SlideItem'
-import PlatformItem from '../components/index/PlatformItem'
-export default {
-  components: { SlideItem, PlatformItem },
-  data () {
-    return {
-      currentCommandSlide: '',
-      currentSnippetSlide: '',
-      isDetailView: true
-    }
-  },
-  async created () {
-    await this.$store.dispatch('commands/fetchCommands')
-    await this.$store.dispatch('snippets/fetchSnippets')
-    if (this.hasCommands) {
-      this.currentCommandSlide = `${this.sliderCommands[0].id}`
-      this.currentSnippetSlide = `${this.sliderSnippets[0].id}`
-    }
-  },
-  computed: {
-    commands: {
-      get () {
-        return this.$store.state.commands.commandsData
-      }
-    },
-    snippets: {
-      get () {
-        return this.$store.state.snippets.snippetsData
-      }
-    },
-    sliderCommands: {
-      get () {
-        return this.$store.getters['commands/getLastCommands'](6)
-      }
-    },
-    sliderSnippets: {
-      get () {
-        return this.$store.getters['snippets/getLastSnippets'](3)
-      }
-    },
-    hasCommands: {
-      get () {
-        return this.commands.length > 0
-      }
-    },
-    hasSnippets: {
-      get () {
-        return this.snippets.length > 0
-      }
-    },
-    getCommandsPlatform () {
-      const platforms = []
-      for (var i = 0; i < this.commands.length; i++) {
-        const cmd = this.commands[i]
-        if (!platforms.includes(cmd.platform)) {
-          platforms.push(cmd.platform)
-        }
-      }
-      return platforms
-    },
-    getSnippetsPlatform () {
-      const platforms = []
-      for (var i = 0; i < this.snippets.length; i++) {
-        const snp = this.snippets[i]
-        if (!platforms.includes(snp.platform)) {
-          platforms.push(snp.platform)
-        }
-      }
-      return platforms
-    }
-  }
-}
-</script>

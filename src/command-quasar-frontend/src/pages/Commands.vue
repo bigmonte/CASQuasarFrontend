@@ -14,11 +14,6 @@ import CommandList from '../components/commands/CommandList'
 
 export default {
   components: { CommandList },
-  data () {
-    return {
-      isDetailView: true
-    }
-  },
   watch: {
     searchText: function (text) {
       this.handleSearch(text)

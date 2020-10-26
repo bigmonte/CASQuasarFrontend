@@ -23,9 +23,7 @@ export default {
   },
   computed: {
     snippet: {
-      get () {
-        return this.$store.getters['snippets/getSnippetWithId'](this.$route.params.id)
-      }
+      get () { return this.$store.getters['snippets/getSnippetWithId'](this.$route.params.id) }
     }
   }
 }

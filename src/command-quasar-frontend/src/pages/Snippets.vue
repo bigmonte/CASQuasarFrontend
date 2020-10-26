@@ -1,24 +1,8 @@
-<template>
-  <snippet-list
-    v-if="this.snippets.length > 0"
-    :snippets="snippets">
-  </snippet-list>
-  <div
-        class="text-h6 text-white text-center q-pa-xl"
-        v-else>No snippets to show
-  </div>
-</template>
-
 <script>
 import SnippetList from '../components/snippets/SnippetList'
 
 export default {
   components: { SnippetList },
-  data () {
-    return {
-      isDetailView: true
-    }
-  },
   watch: {
     searchText: function (text) {
       this.handleSearch(text)
@@ -36,24 +20,28 @@ export default {
   },
   computed: {
     canSearch: {
-      get () {
-        return this.$store.getters['snippets/canSearch']
-      }
+      get () { return this.$store.getters['snippets/canSearch'] }
     },
     snippets: {
       get () {
         if (this.canSearch) return this.$store.state.snippets.searchData
         return this.$store.state.snippets.snippetsData
-      },
-      set (val) {
-        if (!this.canSearch) this.$store.commit('snippets/updateSnippets', val)
       }
     },
     searchText: {
-      get () {
-        return this.$store.state.snippets.searchText
-      }
+      get () { return this.$store.state.snippets.searchText }
     }
   }
 }
 </script>
+
+<template>
+  <snippet-list
+    v-if="this.snippets.length > 0"
+    :snippets="snippets">
+  </snippet-list>
+  <div
+        class="text-h6 text-white text-center q-pa-xl"
+        v-else>No snippets to show
+  </div>
+</template>

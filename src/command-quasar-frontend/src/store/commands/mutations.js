@@ -6,11 +6,6 @@ export const updateCommands = (state, commandsList) => {
   commandsList.forEach(d => state.commandsData.push(new Command(d.howTo, d.platform, d.commandLine, d.id)))
 }
 
-export const updateCommandsToShow = (state, commandsList) => {
-  state.commandsToShow = []
-  commandsList.forEach(d => state.commandsToShow.push(new Command(d.howTo, d.platform, d.commandLine, d.id)))
-}
-
 export const removeFromIndex = (state, index) => {
   state.commandsData.splice(index, 1)
 }
