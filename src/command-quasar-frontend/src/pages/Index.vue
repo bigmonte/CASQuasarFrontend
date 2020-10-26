@@ -2,7 +2,7 @@
 <div>
   <q-carousel
         v-if="hasCommands"
-        v-model="currentSlide"
+        v-model="currentCommandSlide"
         transition-prev="scale"
         transition-next="scale"
         swipeable
@@ -11,10 +11,10 @@
         navigation
         padding
         arrows
-        height="300px"
+        height="250px"
         class="bg-primary text-white shadow-1 rounded-borders"
       >
-        <template v-for="command in commands">
+        <template v-for="command in sliderCommands">
           <slide-item
             :key="command.id"
             :name="`${command.id}`"
@@ -34,6 +34,7 @@
         <q-list dense bordered padding class="rounded-borders bg-primary"
           v-for="platform in getCommandsPlatform" :key="platform">
           <platform-item
+            type='commands'
             :platform="platform"/>
         </q-list>
       </div>
@@ -43,6 +44,7 @@
         <q-list dense bordered padding class="rounded-borders bg-primary"
           v-for="platform in getSnippetsPlatform" :key="platform">
           <platform-item
+            type='snippets'
             :platform="platform"/>
         </q-list>
       </div>
@@ -58,7 +60,8 @@ export default {
   components: { SlideItem, PlatformItem },
   data () {
     return {
-      currentSlide: '',
+      currentCommandSlide: '',
+      currentSnippetSlide: '',
       isDetailView: true
     }
   },
@@ -66,7 +69,8 @@ export default {
     await this.$store.dispatch('commands/fetchCommands')
     await this.$store.dispatch('snippets/fetchSnippets')
     if (this.hasCommands) {
-      this.currentSlide = `${this.commands[0].id}`
+      this.currentCommandSlide = `${this.sliderCommands[0].id}`
+      this.currentSnippetSlide = `${this.sliderSnippets[0].id}`
     }
   },
   computed: {
@@ -78,6 +82,16 @@ export default {
     snippets: {
       get () {
         return this.$store.state.snippets.snippetsData
+      }
+    },
+    sliderCommands: {
+      get () {
+        return this.$store.getters['commands/getLastCommands'](6)
+      }
+    },
+    sliderSnippets: {
+      get () {
+        return this.$store.getters['snippets/getLastSnippets'](3)
       }
     },
     hasCommands: {

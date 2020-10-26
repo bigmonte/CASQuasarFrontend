@@ -32,7 +32,7 @@ export default {
           <div class="text-h6 text-white q-ml-sm">{{ snippet.howTo }}</div>
           <div class="text text-white q-ml-sm">{{ snippet.platform }}</div>
           <div class="text text-green q-ml-sm q-mt-md">
-            <code>{{ snippet.codeSnippet }}</code>
+            <p>{{ snippet.codeSnippet }}</p> <!-- TODO use markdown-it like Quasar docs uses -->
           </div>
         </div>
         <div class="col-xl">

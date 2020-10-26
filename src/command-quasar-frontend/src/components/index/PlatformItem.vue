@@ -2,12 +2,17 @@
 export default {
   props: {
     platform: {
-      type: String
+      type: String,
+      required: true
+    },
+    type: {
+      type: String,
+      required: true
     }
   },
   methods: {
     onItemClicked () {
-      this.$router.push({ name: 'commandsPlatform', params: { platform: this.platform } })
+      this.$router.push({ name: `${this.type}Platform`, params: { platform: this.platform } })
     }
   }
 }

@@ -22,10 +22,7 @@ export default {
 </script>
 
 <template>
-  <q-carousel-slide :name="name" class="column no-wrap flex-center">
-    <q-icon name="style" size="56px"></q-icon>
-    <div class="q-mt-md text-center">
-    </div>
+  <q-carousel-slide :name="name" class="column no-wrap">
     <q-card dark bordered class="bg-primary my-card">
       <q-card-section>
         <div class="text-h6">{{title}}</div>

@@ -23,6 +23,7 @@ const routes = [
     children: [
       { path: '', name: 'snippets', component: () => import('pages/Snippets.vue') },
       { path: 'new', name: 'snippetsNew', component: () => import('pages/SnippetNew.vue') },
+      { path: 'platform/:platform', name: 'snippetsPlatform', component: () => import('pages/SnippetsPlatform.vue') },
       { path: 'edit/:id', name: 'snippetEdit', component: () => import('pages/SnippetEdit.vue') }
     ]
   },
